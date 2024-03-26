@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
+//        SALVE LUAN BELEZAW?
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
