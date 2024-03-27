@@ -81,7 +81,6 @@
         android:background="@drawable/rounded_button"
         />
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cvCard"
         android:layout_width="fill_parent"
@@ -92,6 +91,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="-90dp"
         app:cardCornerRadius="80dp"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
