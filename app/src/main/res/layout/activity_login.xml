@@ -7,4 +7,91 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:contentDescription="@string/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/logopuc"/>
+
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/ivLogo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="150dp"
+        android:text="@string/login"
+        android:textSize="35sp"
+        android:textFontWeight="@android:integer/config_longAnimTime"
+        android:textColor="@color/black"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etRa"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.6"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvLogin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="40dp"
+        android:padding="10dp"
+        android:hint="@string/hint_ra"
+        android:fontFamily="sans-serif"
+        android:backgroundTint="@color/azul_claro"
+        android:textColorHint="@color/azul_claro"
+        />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etSenha"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.6"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/etRa"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="30dp"
+        android:padding="10dp"
+        android:hint="@string/hint_senha"
+        android:inputType="textPassword"
+        android:fontFamily="sans-serif"
+        android:backgroundTint="@color/azul_claro"
+        android:textColorHint="@color/azul_claro"
+        />
+    
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnEntrar"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.6"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSenha"
+        android:layout_marginTop="40dp"
+        android:padding="10dp"
+        android:text="@string/entrar"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@drawable/rounded_button"
+        />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvCard"
+        android:layout_width="fill_parent"
+        android:layout_height="500dp"
+        android:backgroundTint="@color/amarelo"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:layout_marginTop="-150dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="-90dp"
+        app:cardCornerRadius="80dp"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
