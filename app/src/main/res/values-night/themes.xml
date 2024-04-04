@@ -16,6 +16,7 @@
     </style>
 
     <style name="loginScreen" parent="Theme.SIMON">
+        <item name="android:background">@color/azul_escuro</item>
     </style>
 
 </resources>
