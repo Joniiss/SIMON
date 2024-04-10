@@ -1,5 +1,6 @@
 package com.app.simon
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -43,6 +44,8 @@ class LoginActivity : AppCompatActivity() {
                             baseContext, "Login realizado para usuário " + user!!.email,
                             Toast.LENGTH_LONG
                         ).show()
+                        val i = Intent(this, MainActivity::class.java)
+                        this.startActivity(i)
                     } else {
                         Toast.makeText(
                             baseContext, "Email ou senha incorreta, tente novamente!",
