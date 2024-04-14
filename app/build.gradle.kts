@@ -77,6 +77,12 @@ dependencies {
 
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.firebaseui:firebase-ui-auth:7.2.0")
+    implementation("com.google.firebase:firebase-functions")
+    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.firebase:firebase-firestore:24.11.1")
+
+
+    implementation("com.beust:klaxon:5.5")
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
 }
