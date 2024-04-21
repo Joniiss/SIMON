@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.messaging.ktx.messaging
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.ktx.functions
@@ -27,8 +28,26 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var functions: FirebaseFunctions
+    private lateinit var userPreferencesRepository: UserPreferencesRepository
     private var db = FirebaseFirestore.getInstance()
     private val gson = GsonBuilder().enableComplexMapKeySerialization().create()
+
+    fun storeUserId(uid: String) {
+        userPreferencesRepository.updateUid(uid)
+    }
+
+    private fun storeFcmToken() {
+        Firebase.messaging.token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+            userPreferencesRepository.fcmToken = task.result
+        })
+    }
+
+    fun getFcmToken(): String {
+        return userPreferencesRepository.fcmToken
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,6 +115,15 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+//    override fun onStart() {
+//        super.onStart()
+//        val currentUser = FirebaseAuth.getInstance().currentUser
+//        if(currentUser != null) {
+//            startActivity(Intent(this, MainActivity::class.java))
+//            finish()
+//        }
+//    }
+
     private fun login(uid: String): Task<String> {
 
         val data = hashMapOf(
@@ -109,4 +137,9 @@ class LoginActivity : AppCompatActivity() {
                 res
             }
     }
+
+//    override fun onSupportNavigateUp(): Boolean {
+//        val navController = findNavController(R.id.nav_host_fragment_content_login)
+//        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+//    }
 }
