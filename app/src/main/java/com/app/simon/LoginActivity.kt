@@ -99,6 +99,7 @@ class LoginActivity : AppCompatActivity() {
                                             val i = Intent(this, MainActivity::class.java)
                                             i.putExtra("user", result as Serializable)
                                             this.startActivity(i)
+                                            finish()
                                         }
                                 }
                                 else {
@@ -137,9 +138,4 @@ class LoginActivity : AppCompatActivity() {
                 res
             }
     }
-
-//    override fun onSupportNavigateUp(): Boolean {
-//        val navController = findNavController(R.id.nav_host_fragment_content_login)
-//        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-//    }
 }

@@ -26,7 +26,6 @@ import com.google.firebase.ktx.Firebase
 class UserFragment : Fragment() {
 
     private var _binding: FragmentUserBinding? = null
-    private val binding get() = _binding!!
 
     private var db = FirebaseFirestore.getInstance()
     private val user = Firebase.auth.currentUser
@@ -35,11 +34,13 @@ class UserFragment : Fragment() {
     private lateinit var mAdapter: MyAdapter
     private lateinit var mItems: MutableList<String>
     private lateinit var tvNome: TextView
-    companion object {
-        fun newInstance() = UserFragment()
-    }
 
-    private val viewModel: MainViewModel by viewModels()
+    private val binding get() = _binding!!
+//    companion object {
+//        fun newInstance() = UserFragment()
+//    }
+
+    //private val viewModel: MainViewModel by viewModels()
 
     /*override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,11 +59,16 @@ class UserFragment : Fragment() {
         }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        _binding = FragmentUserBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        _binding = FragmentUserBinding.inflate(inflater,container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
 
@@ -93,8 +99,6 @@ class UserFragment : Fragment() {
         binding.btnChangePhoto.setOnClickListener {
             cameraProviderResult.launch(Manifest.permission.CAMERA)
         }
-
-        return binding.root
     }
 
     private fun cameraScreen() {

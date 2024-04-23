@@ -10,9 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.simon.MyAdapter
 import com.app.simon.R
+import com.app.simon.databinding.FragmentMainBinding
 
 
 class MainFragment : Fragment() {
+
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: MyAdapter
     private lateinit var mItems: MutableList<String>
@@ -20,21 +24,19 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private val viewModel: MainViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-    }
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val rootView = inflater.inflate(R.layout.fragment_main, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        mRecyclerView = rootView.findViewById(R.id.rvLista)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mRecyclerView = binding.rvLista
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
 
         mItems = ArrayList()
@@ -43,8 +45,11 @@ class MainFragment : Fragment() {
 
         mAdapter = MyAdapter(mItems)
         mRecyclerView.adapter = mAdapter
+    }
 
-        return rootView
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
