@@ -22,7 +22,7 @@ class MyAdapter(private val mData: List<String>) : RecyclerView.Adapter<MyAdapte
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textView: TextView = itemView.findViewById(R.id.tvTeste)
+        private val textView: TextView = itemView.findViewById(R.id.tvNomeMateria)
 
         fun bind(item: String) {
             textView.text = item

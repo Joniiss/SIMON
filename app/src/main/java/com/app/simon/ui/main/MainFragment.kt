@@ -40,7 +40,7 @@ class MainFragment : Fragment() {
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
 
         mItems = ArrayList()
-        mItems.add("Item 1 AKNJSRNKJARJNKR")
+        mItems.add("Arnado")
         mItems.add("Item 2 pubg")
 
         mAdapter = MyAdapter(mItems)
