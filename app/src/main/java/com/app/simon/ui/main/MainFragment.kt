@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.simon.MyAdapter
 import com.app.simon.R
+import com.app.simon.User
 import com.app.simon.databinding.FragmentMainBinding
 
 
@@ -36,11 +37,14 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
+
+
         mRecyclerView = binding.rvLista
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
 
         mItems = ArrayList()
-        mItems.add("Arnado")
+        mItems.add(user.nome)
         mItems.add("Item 2 pubg")
 
         mAdapter = MyAdapter(mItems)
