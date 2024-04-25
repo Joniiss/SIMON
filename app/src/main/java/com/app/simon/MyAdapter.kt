@@ -1,9 +1,11 @@
 package com.app.simon
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+
 
 class MyAdapter(private val mData: List<String>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 

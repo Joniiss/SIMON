@@ -1,11 +1,15 @@
 package com.app.simon.ui.main
 
+import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.simon.MyAdapter
@@ -42,10 +46,13 @@ class MainFragment : Fragment() {
 
         mRecyclerView = binding.rvLista
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
-
         mItems = ArrayList()
-        mItems.add(user.nome)
-        mItems.add("Item 2 pubg")
+
+
+
+        for(item : String in user.materias) {
+            mItems.add(item)
+        }
 
         mAdapter = MyAdapter(mItems)
         mRecyclerView.adapter = mAdapter

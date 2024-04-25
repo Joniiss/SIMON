@@ -29,15 +29,18 @@
     <TextView
         android:id="@+id/tvNomeMateria"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="30dp"
         app:layout_constraintTop_toBottomOf="@id/tvCor"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/tvFundoMateria"
         android:layout_marginHorizontal="25dp"
-        android:textSize="25sp"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMinTextSize="20sp"
+        app:autoSizeMaxTextSize="26sp"
+        app:autoSizeStepGranularity="1sp"
         android:text="Materia"
         android:paddingHorizontal="5dp"
+
 
         />
 
