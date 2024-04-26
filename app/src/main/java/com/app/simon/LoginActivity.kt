@@ -2,6 +2,7 @@ package com.app.simon
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -66,53 +67,73 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnEntrar.setOnClickListener {
 
-            auth.signInWithEmailAndPassword(
-                binding.etRa.text.toString(),
-                binding.etSenha.text.toString()
-            )
-                .addOnCompleteListener(this) { task ->
-                    if(task.isSuccessful){
-                        val user = auth.currentUser
+            if (binding.etRa.text.toString() == "" || binding.etSenha.text.toString() == "") {
+                Toast.makeText(
+                    baseContext, "Email ou senha incorreta, tente novamente!",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                auth.signInWithEmailAndPassword(
+                    binding.etRa.text.toString(),
+                    binding.etSenha.text.toString()
+                )
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
 
-                        functions = Firebase.functions("southamerica-east1")
+                            binding.btnEntrar.isEnabled = false
+                            binding.btnEntrar.background = getDrawable(R.drawable.rounded_button_disabled)
+                            binding.progressBar.visibility = View.VISIBLE
 
-                        login(user!!.uid)
-                            .addOnCompleteListener(OnCompleteListener { task ->
-                                if(task.isSuccessful) {
-                                    val genericResp = gson.fromJson(task.result, FunctionsGenericResponse::class.java)
+                            val user = auth.currentUser
 
-                                    val result = Klaxon()
-                                        .parse<User>(genericResp.payload.toString())
+                            functions = Firebase.functions("southamerica-east1")
 
-                                    db.collection("Alunos").whereEqualTo("uid", "w3qRRACjXpO9z8SNDDnHSkAcQyi2")
-                                        .get()
-                                        .addOnSuccessListener { documents ->
-                                            for(document in documents) {
-                                                result!!.celular = document["celular"].toString()
-                                                result.email = document["email"].toString()
-                                                result.horario = document["horario"].toString()
-                                                result.predio = document["predio"].toString()
-                                                result.sala = document["sala"].toString()
-                                                result.status = document["status"] as Boolean
-                                                result.uid = user.uid
+                            login(user!!.uid)
+                                .addOnCompleteListener(OnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        val genericResp = gson.fromJson(
+                                            task.result,
+                                            FunctionsGenericResponse::class.java
+                                        )
+
+                                        val result = Klaxon()
+                                            .parse<User>(genericResp.payload.toString())
+
+                                        db.collection("Alunos")
+                                            .whereEqualTo("uid", "w3qRRACjXpO9z8SNDDnHSkAcQyi2")
+                                            .get()
+                                            .addOnSuccessListener { documents ->
+                                                for (document in documents) {
+                                                    result!!.celular =
+                                                        document["celular"].toString()
+                                                    result.email = document["email"].toString()
+                                                    result.horario = document["horario"].toString()
+                                                    result.predio = document["predio"].toString()
+                                                    result.sala = document["sala"].toString()
+                                                    result.status = document["status"] as Boolean
+                                                    result.uid = user.uid
+                                                }
+                                                val i = Intent(this, MainActivity::class.java)
+                                                i.putExtra("user", result as Serializable)
+                                                this.startActivity(i)
+                                                finish()
                                             }
-                                            val i = Intent(this, MainActivity::class.java)
-                                            i.putExtra("user", result as Serializable)
-                                            this.startActivity(i)
-                                            finish()
-                                        }
-                                }
-                                else {
-                                    Toast.makeText(this, "Erro", Toast.LENGTH_SHORT).show()
-                                }
-                            })
-                    } else {
-                        Toast.makeText(
-                            baseContext, "Email ou senha incorreta, tente novamente!",
-                            Toast.LENGTH_LONG
-                        ).show()
+                                    } else {
+                                        Toast.makeText(this, "Erro", Toast.LENGTH_SHORT).show()
+                                    }
+                                })
+                        } else {
+                            Toast.makeText(
+                                baseContext, "Email ou senha incorreta, tente novamente!",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                     }
-                }
+            }
+
+            binding.btnEntrar.isEnabled = true
+            binding.btnEntrar.background = getDrawable(R.drawable.rounded_button)
+            binding.progressBar.visibility = View.GONE
         }
     }
 

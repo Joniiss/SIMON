@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="amarelo">#f3bf1d</color>
     <color name="azul_claro">#377eff</color>
+    <color name="azul_claro_fade_50">#80377EFF</color>
     <color name="verde_agua">#37E1FF</color>
     <color name="azul_escuro">#0c2e92</color>
 </resources>
