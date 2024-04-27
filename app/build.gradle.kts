@@ -99,4 +99,6 @@ dependencies {
     implementation("com.beust:klaxon:5.5")
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation("com.squareup.picasso:picasso:2.5.2")
 }

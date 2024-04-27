@@ -13,6 +13,6 @@ data class User(
     var horario: String = "",
     var predio: String = "",
     var sala: String = "",
-    var status: Boolean = false
+    var status: String = "false"
     //val materiasMonitor: List<String>?
 ) : Serializable

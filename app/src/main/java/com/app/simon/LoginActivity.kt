@@ -110,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
                                                     result.horario = document["horario"].toString()
                                                     result.predio = document["predio"].toString()
                                                     result.sala = document["sala"].toString()
-                                                    result.status = document["status"] as Boolean
+                                                    result.status = document["status"].toString()
                                                     result.uid = user.uid
                                                 }
                                                 val i = Intent(this, MainActivity::class.java)

@@ -2,6 +2,7 @@ package com.app.simon
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -22,6 +23,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
+import java.io.File
 
 
 class UserFragment : Fragment() {
@@ -73,6 +77,7 @@ class UserFragment : Fragment() {
 
         val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
 
+        loadPic()
         binding.tvNome.text = user.nome
         binding.etCel.hint = user.celular
         binding.etEmail.hint = user.email
@@ -80,7 +85,7 @@ class UserFragment : Fragment() {
         binding.etSala.hint = user.sala
         binding.etHorario.hint = user.horario
 
-        if(user.status) {
+        if(user.status == "true") {
             binding.tbtnStatus.isChecked = true
             binding.tvToggle.text = "Disponível"
         } else {
@@ -89,7 +94,7 @@ class UserFragment : Fragment() {
         }
 
         binding.tbtnStatus.setOnCheckedChangeListener{ buttonview, isChecked ->
-            attStatus(isChecked)
+            attStatus(isChecked.toString())
             if(isChecked) {
                 binding.tvToggle.text = "Disponível"
             } else {
@@ -107,15 +112,51 @@ class UserFragment : Fragment() {
         startActivity(intentCameraPreview)
     }
 
-    private fun attStatus(status: Boolean) {
+    private fun loadPic() {
+        val storage = FirebaseStorage.getInstance()
+        val storageRef1 = storage.getReferenceFromUrl("gs://simon-12985.appspot.com/perfis/default.jpeg")
+        val localFile1 = File.createTempFile("images", "jpg")
+
+        storageRef1.getFile(localFile1).addOnSuccessListener {
+            // Local temp file has been created
+            val bitmap = BitmapFactory.decodeFile(localFile1.absolutePath)
+            Picasso.with(context).load("file:" + localFile1.absolutePath).fit().centerInside().into(binding.ivPerfil)
+
+            //Picasso.with(this).load("file:" + localFile1.absolutePath).into(binding.ivFoto1)
+            //binding.ivFoto1.setImageBitmap(bitmap)
+        }.addOnFailureListener {
+            // Handle any errors
+            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun attFirestore(campo: String, dado: String) {
         db.collection("Alunos").whereEqualTo("uid", user!!.uid)
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents) {
                     db.collection("Alunos").document(document.id)
-                        .update("status", status)
+                        .update(campo, dado)
                 }
             }
+    }
+    private fun attCel(cel: String) {
+        attFirestore("celular", cel)
+    }
+
+    private fun attEmail(email: String) {
+        attFirestore("email", email)
+    }
+
+    private fun attPredio(predio: String) {
+        attFirestore("predio", predio)
+    }
+
+    private fun attSala(sala: String) {
+        attFirestore("sala", sala)
+    }
+    private fun attStatus(status: String) {
+        attFirestore("status", status)
     }
 
     override fun onDestroyView() {
