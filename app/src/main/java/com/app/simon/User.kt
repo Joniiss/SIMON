@@ -5,6 +5,7 @@ import java.io.Serializable
 data class User(
     val periodo: String,
     val curso: String,
+    var pNome: String = "",
     val nome: String,
     val materias: ArrayList<String>,
     var uid: String = "",
