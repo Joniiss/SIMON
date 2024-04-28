@@ -77,7 +77,7 @@ class UserFragment : Fragment() {
 
         val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
 
-        loadPic()
+        loadPic(user.foto)
         binding.tvNome.text = user.nome
         binding.etCel.hint = user.celular
         binding.etEmail.hint = user.email
@@ -112,23 +112,29 @@ class UserFragment : Fragment() {
         startActivity(intentCameraPreview)
     }
 
-    private fun loadPic() {
+    private fun loadPic(foto: String) {
         val storage = FirebaseStorage.getInstance()
-        val storageRef1 = storage.getReferenceFromUrl("gs://simon-12985.appspot.com/perfis/default.jpeg")
+        //val storageRef1 = storage.getReferenceFromUrl("gs://simon-12985.appspot.com/perfis/default.jpeg")
+        val storageRef1 = storage.getReferenceFromUrl(foto)
         val localFile1 = File.createTempFile("images", "jpg")
 
         storageRef1.getFile(localFile1).addOnSuccessListener {
             // Local temp file has been created
-            val bitmap = BitmapFactory.decodeFile(localFile1.absolutePath)
+            //val bitmap = BitmapFactory.decodeFile(localFile1.absolutePath)
             Picasso.with(context).load("file:" + localFile1.absolutePath).fit().centerInside().into(binding.ivPerfil)
 
-            //Picasso.with(this).load("file:" + localFile1.absolutePath).into(binding.ivFoto1)
-            //binding.ivFoto1.setImageBitmap(bitmap)
+
+            /*
+            val bitmap = BitmapFactory.decodeFile(localFile1.absolutePath)
+            Picasso.with(context).load("file:" + localFile1.absolutePath).fit().centerInside().into(binding.ivPerfil)
+            */
+
         }.addOnFailureListener {
             // Handle any errors
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun attFirestore(campo: String, dado: String) {
         db.collection("Alunos").whereEqualTo("uid", user!!.uid)

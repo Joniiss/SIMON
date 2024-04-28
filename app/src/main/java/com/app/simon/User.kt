@@ -1,5 +1,6 @@
 package com.app.simon
 
+import java.io.File
 import java.io.Serializable
 
 data class User(
@@ -14,6 +15,7 @@ data class User(
     var horario: String = "",
     var predio: String = "",
     var sala: String = "",
-    var status: String = "false"
+    var status: String = "false",
+    var foto: String = ""
     //val materiasMonitor: List<String>?
 ) : Serializable

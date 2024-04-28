@@ -79,6 +79,8 @@ class LoadingActivity : AppCompatActivity() {
                                         currentUser.uid
                                     user.pNome =
                                         user.nome.split(" ")[0]
+                                    user.foto =
+                                        document["foto"].toString()
                                 }
                                 val i = Intent(this, MainActivity::class.java)
                                 i.putExtra("user", user as Serializable)

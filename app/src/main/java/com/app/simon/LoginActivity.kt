@@ -106,12 +106,22 @@ class LoginActivity : AppCompatActivity() {
                                                 for (document in documents) {
                                                     result!!.celular =
                                                         document["celular"].toString()
-                                                    result.email = document["email"].toString()
-                                                    result.horario = document["horario"].toString()
-                                                    result.predio = document["predio"].toString()
-                                                    result.sala = document["sala"].toString()
-                                                    result.status = document["status"].toString()
-                                                    result.uid = user.uid
+                                                    result.email =
+                                                        document["email"].toString()
+                                                    result.horario =
+                                                        document["horario"].toString()
+                                                    result.predio =
+                                                        document["predio"].toString()
+                                                    result.sala =
+                                                        document["sala"].toString()
+                                                    result.status =
+                                                        document["status"].toString()
+                                                    result.uid =
+                                                        user.uid
+                                                    result.pNome =
+                                                        result.nome.split(" ")[0]
+                                                    result.foto =
+                                                        document["foto"].toString()
                                                 }
                                                 val i = Intent(this, MainActivity::class.java)
                                                 i.putExtra("user", result as Serializable)
