@@ -26,6 +26,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import java.io.File
+import java.io.Serializable
 
 
 class UserFragment : Fragment() {
@@ -33,7 +34,7 @@ class UserFragment : Fragment() {
     private var _binding: FragmentUserBinding? = null
 
     private var db = FirebaseFirestore.getInstance()
-    private val user = Firebase.auth.currentUser
+    private val fireUser = Firebase.auth.currentUser
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: MyAdapter
@@ -105,6 +106,12 @@ class UserFragment : Fragment() {
         binding.btnChangePhoto.setOnClickListener {
             cameraProviderResult.launch(Manifest.permission.CAMERA)
         }
+
+        binding.btnLogout.setOnClickListener {
+            Firebase.auth.signOut()
+            val i = Intent(context, LoginActivity::class.java)
+            this.startActivity(i)
+        }
     }
 
     private fun cameraScreen() {
@@ -137,7 +144,7 @@ class UserFragment : Fragment() {
 
 
     private fun attFirestore(campo: String, dado: String) {
-        db.collection("Alunos").whereEqualTo("uid", user!!.uid)
+        db.collection("Alunos").whereEqualTo("uid", fireUser!!.uid)
             .get()
             .addOnSuccessListener { documents ->
                 for(document in documents) {
