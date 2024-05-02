@@ -113,37 +113,37 @@
         android:textSize="20sp"
         />
 
-    <EditText
-        android:id="@+id/etCel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="45dp"
-        app:layout_constraintTop_toBottomOf="@id/tvContato"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/textbox"
-        android:drawableStart="@drawable/whatsapp"
-        android:paddingStart="10dp"
-        android:paddingEnd="45dp"
-        android:drawablePadding="6dp"
-        android:enabled="false"
-        android:maxLines="1"
-        android:singleLine="true"
-        />
+        <EditText
+            android:id="@+id/etCel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/textbox"
+            android:drawableStart="@drawable/whatsapp"
+            android:drawablePadding="6dp"
+            android:enabled="false"
+            android:maxLines="1"
+            android:minHeight="45dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="45dp"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvContato" />
 
-    <androidx.appcompat.widget.AppCompatButton
+        <ToggleButton
         android:id="@+id/btnEditarCel"
         android:layout_width="45dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         app:layout_constraintTop_toTopOf="@id/etCel"
         app:layout_constraintBottom_toBottomOf="@id/etCel"
         app:layout_constraintEnd_toEndOf="@id/etCel"
         android:textAlignment="center"
-        android:drawableStart="@drawable/edit"
-        android:backgroundTint="@color/amarelo"
-        />
+        android:drawableStart="@drawable/toggle_selector"
+        android:backgroundTint="@color/amarelo"/>
+
 
     <EditText
         android:id="@+id/etEmail"
@@ -166,17 +166,16 @@
         android:singleLine="true"
         />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnEditarEmail"
-        android:layout_width="45dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/etEmail"
-        app:layout_constraintBottom_toBottomOf="@id/etEmail"
-        app:layout_constraintEnd_toEndOf="@id/etEmail"
-        android:textAlignment="center"
-        android:drawableStart="@drawable/edit"
-        android:backgroundTint="@color/amarelo"
-        />
+        <ToggleButton
+            android:id="@+id/btnEditarEmail"
+            android:layout_width="45dp"
+            android:layout_height="48dp"
+            android:textAlignment="center"
+            android:drawableStart="@drawable/toggle_selector"
+            android:backgroundTint="@color/amarelo"
+            app:layout_constraintBottom_toBottomOf="@id/etEmail"
+            app:layout_constraintEnd_toEndOf="@id/etEmail"
+            app:layout_constraintTop_toTopOf="@id/etEmail"/>
 
     <TextView
         android:id="@+id/tvPredio"
@@ -203,10 +202,21 @@
         android:paddingStart="10dp"
         android:paddingEnd="15dp"
         android:drawablePadding="6dp"
-        android:enabled="true"
+        android:enabled="false"
         android:maxLines="1"
         android:singleLine="true"
         />
+
+        <ToggleButton
+            android:id="@+id/btnEditarPredio"
+            android:layout_width="45dp"
+            android:layout_height="48dp"
+            android:textAlignment="center"
+            android:drawableStart="@drawable/toggle_selector"
+            android:backgroundTint="@color/amarelo"
+            app:layout_constraintBottom_toBottomOf="@id/etPredio"
+            app:layout_constraintEnd_toEndOf="@id/etPredio"
+            app:layout_constraintTop_toTopOf="@id/etPredio"/>
 
     <TextView
         android:id="@+id/tvSala"
@@ -234,10 +244,21 @@
             android:paddingStart="10dp"
             android:paddingEnd="15dp"
             android:drawablePadding="6dp"
-            android:enabled="true"
+            android:enabled="false"
             android:maxLines="1"
             android:singleLine="true"
             />
+
+        <ToggleButton
+            android:id="@+id/btnEditarSala"
+            android:layout_width="45dp"
+            android:layout_height="48dp"
+            android:textAlignment="center"
+            android:drawableStart="@drawable/toggle_selector"
+            android:backgroundTint="@color/amarelo"
+            app:layout_constraintBottom_toBottomOf="@id/etSala"
+            app:layout_constraintEnd_toEndOf="@id/etSala"
+            app:layout_constraintTop_toTopOf="@id/etSala"/>
 
         <TextView
             android:id="@+id/tvHorario"
@@ -245,35 +266,77 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/etPredio"
             app:layout_constraintTop_toBottomOf="@id/etPredio"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:text="Horário"
             android:textStyle="bold"
             android:textSize="20sp"
             />
 
+        <TextView
+            android:id="@+id/tvDe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/etPredio"
+            app:layout_constraintTop_toBottomOf="@id/tvHorario"
+            android:layout_marginTop="5dp"
+            android:text="De"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/tvAte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/etHorarioAte"
+            app:layout_constraintTop_toBottomOf="@id/tvHorario"
+            android:layout_marginTop="5dp"
+            android:text="Até"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+
         <EditText
-            android:id="@+id/etHorario"
-            android:layout_width="210dp"
+            android:id="@+id/etHorarioDe"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:minHeight="45dp"
-            app:layout_constraintTop_toBottomOf="@id/tvHorario"
-            app:layout_constraintStart_toStartOf="@id/tvHorario"
+            app:layout_constraintTop_toBottomOf="@id/tvDe"
+            app:layout_constraintStart_toStartOf="@id/tvDe"
             android:background="@drawable/textbox"
             android:drawableStart="@drawable/hours"
             android:paddingStart="10dp"
             android:paddingEnd="15dp"
             android:drawablePadding="6dp"
-            android:enabled="true"
+            android:enabled="false"
             android:maxLines="1"
             android:singleLine="true"
             />
 
-    <TextView
+        <EditText
+            android:id="@+id/etHorarioAte"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textbox"
+            android:drawableStart="@drawable/hours"
+            android:drawablePadding="6dp"
+            android:enabled="false"
+            android:maxLines="1"
+            android:minHeight="45dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="15dp"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toEndOf="@id/etHorarioDe"
+            app:layout_constraintTop_toBottomOf="@id/tvDe" />
+
+        <TextView
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Status: "
-        app:layout_constraintTop_toBottomOf="@id/etHorario"
+        app:layout_constraintTop_toBottomOf="@id/etHorarioDe"
         app:layout_constraintStart_toStartOf="@id/tvNome"
         android:layout_marginTop="35dp"
         android:textStyle="bold"
@@ -307,8 +370,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvStatus"
+        app:layout_constraintBottom_toTopOf="@id/cvCard"
         app:layout_constraintStart_toStartOf="@id/tvNome"
         android:layout_marginTop="35dp"
+        android:layout_marginBottom="40dp"
         android:text="Horas Contabilizadas: "
         android:textStyle="bold"
         android:textSize="20sp"
@@ -329,22 +394,6 @@
             android:paddingEnd="6dp"
             android:paddingBottom="2dp"
             android:paddingTop="2dp"
-            />
-
-        <Button
-            android:id="@+id/btnSalvar"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button"
-            android:text="SALVAR"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@id/tvHorasContab"
-            android:layout_marginTop="35dp"
-            android:layout_marginBottom="35dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/cvCard"
             />
 
         <androidx.cardview.widget.CardView

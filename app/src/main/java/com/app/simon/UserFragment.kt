@@ -84,7 +84,7 @@ class UserFragment : Fragment() {
         binding.etEmail.hint = user.email
         binding.etPredio.hint = user.predio
         binding.etSala.hint = user.sala
-        binding.etHorario.hint = user.horario
+
 
         if(user.status == "true") {
             binding.tbtnStatus.isChecked = true
@@ -98,8 +98,10 @@ class UserFragment : Fragment() {
             attStatus(isChecked.toString())
             if(isChecked) {
                 binding.tvToggle.text = "Disponível"
+                user.status = "true"
             } else {
                 binding.tvToggle.text = "Indisponível"
+                user.status = "false"
             }
         }
 
@@ -111,6 +113,79 @@ class UserFragment : Fragment() {
             Firebase.auth.signOut()
             val i = Intent(context, LoginActivity::class.java)
             this.startActivity(i)
+        }
+
+        binding.btnEditarCel.setOnCheckedChangeListener{ buttonview, isChecked ->
+            if(isChecked) {
+                binding.etCel.hint = ""
+                binding.etCel.text.clear()
+                binding.etCel.isEnabled = true
+            }
+            else{
+                // TODO: PESQUISAR SOBRE REGEX
+                if(binding.etCel.text.toString() == ""){
+                    binding.etCel.hint = user.celular
+                }else{
+                    user.celular = binding.etCel.text.toString()
+                    binding.etCel.isEnabled = false
+                    attCel(binding.etCel.text.toString())
+                    Toast.makeText(context, "Celular atualizado!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        binding.btnEditarEmail.setOnCheckedChangeListener{ buttonview, isChecked ->
+            if(isChecked) {
+                binding.etEmail.hint = ""
+                binding.etEmail.text.clear()
+                binding.etEmail.isEnabled = true
+            }
+            else{
+                if(binding.etEmail.text.toString() == ""){
+                    binding.etEmail.hint = user.email
+                }else{
+                    user.email = binding.etEmail.text.toString()
+                    binding.etEmail.isEnabled = false
+                    attEmail(binding.etEmail.text.toString())
+                    Toast.makeText(context, "Email atualizado!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        binding.btnEditarPredio.setOnCheckedChangeListener{ buttonview, isChecked ->
+            if(isChecked) {
+                binding.etPredio.hint = ""
+                binding.etPredio.text.clear()
+                binding.etPredio.isEnabled = true
+            }
+            else{
+                if(binding.etPredio.text.toString() == ""){
+                    binding.etPredio.hint = user.predio
+                }else{
+                    user.predio = binding.etPredio.text.toString()
+                    binding.etPredio.isEnabled = false
+                    attPredio(binding.etPredio.text.toString())
+                    Toast.makeText(context, "Prédio atualizado!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        binding.btnEditarSala.setOnCheckedChangeListener{ buttonview, isChecked ->
+            if(isChecked) {
+                binding.etSala.hint = ""
+                binding.etSala.text.clear()
+                binding.etSala.isEnabled = true
+            }
+            else{
+                if(binding.etSala.text.toString() == ""){
+                    binding.etSala.hint = user.sala
+                }else{
+                    user.sala = binding.etSala.text.toString()
+                    binding.etSala.isEnabled = false
+                    attSala(binding.etSala.text.toString())
+                    Toast.makeText(context, "Sala atualizada!", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -171,6 +246,7 @@ class UserFragment : Fragment() {
     private fun attStatus(status: String) {
         attFirestore("status", status)
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
