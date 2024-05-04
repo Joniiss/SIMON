@@ -1,4 +1,5 @@
 package com.app.simon
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class MyAdapter(private val mData: List<String>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+class MyAdapter(private val mData: MutableList<SubjectData>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_subject, parent, false)
@@ -26,8 +27,16 @@ class MyAdapter(private val mData: List<String>) : RecyclerView.Adapter<MyAdapte
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textView: TextView = itemView.findViewById(R.id.tvNomeMateria)
 
-        fun bind(item: String) {
-            textView.text = item
+        fun bind(item: SubjectData) {
+            textView.text = item.materia
+            itemView.setOnClickListener{
+
+                val iSubject = Intent(itemView.context, SubjectActivity::class.java)
+                iSubject.putExtra("user", item.user)
+                iSubject.putExtra("materiaSub", item.materia)
+                itemView.context.startActivity(iSubject)
+
+            }
         }
     }
 }

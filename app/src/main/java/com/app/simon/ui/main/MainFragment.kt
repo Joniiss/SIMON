@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.simon.MyAdapter
 import com.app.simon.R
+import com.app.simon.SubjectData
 import com.app.simon.User
 import com.app.simon.databinding.FragmentMainBinding
 
@@ -46,12 +47,13 @@ class MainFragment : Fragment() {
 
         mRecyclerView = binding.rvLista
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
-        mItems = ArrayList()
+        var mItems: MutableList<SubjectData> = emptyList<SubjectData>().toMutableList()
 
 
 
         for(item : String in user.materias) {
-            mItems.add(item)
+            val itemSubject = SubjectData(user, item)
+            mItems.add(itemSubject)
         }
 
         mAdapter = MyAdapter(mItems)

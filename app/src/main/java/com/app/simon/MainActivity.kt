@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
         val user = intent.getSerializableExtra("user") as User
 
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -81,4 +83,6 @@ class MainActivity : AppCompatActivity() {
                 .show()
         } else { super.onBackPressed() }
     }
+
+
 }
