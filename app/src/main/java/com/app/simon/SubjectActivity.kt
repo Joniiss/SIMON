@@ -2,16 +2,21 @@ package com.app.simon
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.simon.databinding.ActivityMainBinding
 import com.app.simon.databinding.ActivitySubjectBinding
 
 class SubjectActivity : AppCompatActivity() {
 
+    private lateinit var mRecyclerView: RecyclerView
+    private lateinit var mAdapter: MonitorAdapter
     private lateinit var binding: ActivitySubjectBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,5 +36,22 @@ class SubjectActivity : AppCompatActivity() {
 
         binding.tvTituloMateria.text = materia
 
+        mRecyclerView = binding.rvListaMonitores
+        mRecyclerView.setLayoutManager(LinearLayoutManager(this));
+
+        var mItems: MutableList<MonitorData> = emptyList<MonitorData>().toMutableList()
+
+        var exemplo = MonitorData("Alfredo","Local: S02 - H15","Horario: 16:20 as 16:30")
+        var exemplo2 = MonitorData("qualquer coisa","Local: S02 - H15","Horario: 16:20 as 16:30")
+
+
+        mItems.add(exemplo)
+        mItems.add(exemplo2)
+
+        mAdapter = MonitorAdapter(mItems)
+        mRecyclerView.adapter = mAdapter
+
+
     }
+
 }
