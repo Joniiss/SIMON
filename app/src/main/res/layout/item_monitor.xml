@@ -29,7 +29,6 @@
         app:cardCornerRadius="50dp"
         />
 
-
     <TextView
         android:id="@+id/tvNomeMonitor"
         android:layout_width="wrap_content"

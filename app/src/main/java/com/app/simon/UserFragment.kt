@@ -198,7 +198,14 @@ class UserFragment : Fragment() {
         val storage = FirebaseStorage.getInstance()
         //val storageRef1 = storage.getReferenceFromUrl("gs://simon-12985.appspot.com/perfis/default.jpeg")
         val storageRef1 = storage.getReferenceFromUrl(foto)
+        Toast.makeText(context, storageRef1.toString(), Toast.LENGTH_SHORT).show()
         val localFile1 = File.createTempFile("images", "jpg")
+
+        storageRef1.downloadUrl.addOnSuccessListener { it ->
+
+            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+
+        }
 
         storageRef1.getFile(localFile1).addOnSuccessListener {
             // Local temp file has been created

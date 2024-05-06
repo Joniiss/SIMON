@@ -42,6 +42,7 @@ class LoadingActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        //auth.signOut()
         val currentUser = auth.currentUser
         functions = Firebase.functions("southamerica-east1")
 
