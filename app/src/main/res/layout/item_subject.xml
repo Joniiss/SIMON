@@ -38,6 +38,8 @@
         app:autoSizeMinTextSize="20sp"
         app:autoSizeMaxTextSize="26sp"
         app:autoSizeStepGranularity="1sp"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/fui_transparent"
         android:text="Materia"
         android:paddingHorizontal="5dp"
 

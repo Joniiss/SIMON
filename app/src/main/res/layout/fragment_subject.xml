@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/subject"
+    android:theme="@style/Theme.SIMON"
+    tools:context=".SubjectFragment">
+
+    <TextView
+        android:id="@+id/tvTituloMateria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        android:text="teste"
+        android:textSize="30sp"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvFooter"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/azul_escuro"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnMonitores"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnForum"
+        android:text="Monitores"
+        android:textColor="@color/white"
+        android:drawableRight="@drawable/monitor"
+        android:background="@drawable/ripple_effect"
+        android:paddingHorizontal="46dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnForum"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnMonitores"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Fórum"
+        android:textColor="@color/white"
+        android:drawableEnd="@drawable/forum"
+        android:background="@drawable/ripple_effect"
+        android:paddingHorizontal="60dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListaMonitores"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toBottomOf="@id/cvFooter"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloMateria"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

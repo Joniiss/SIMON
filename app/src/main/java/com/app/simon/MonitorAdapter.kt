@@ -1,8 +1,6 @@
 package com.app.simon
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,23 +29,23 @@ class MonitorAdapter(private val mData: List<MonitorData>, private val context: 
     }
 
     class ViewHolder(itemView: View, context: Context) : RecyclerView.ViewHolder(itemView) {
-        private val Monitor: TextView = itemView.findViewById(R.id.tvNomeMonitor)
-        private val Sala: TextView = itemView.findViewById(R.id.tvLocal)
-        private val Horario: TextView = itemView.findViewById(R.id.tvHorario)
-        private val Imagem: CircleImageView = itemView.findViewById(R.id.ivFotoMonitor)
-        private val Status: CardView = itemView.findViewById(R.id.ivStatusMonitor)
+        private val monitor: TextView = itemView.findViewById(R.id.tvNomeMonitor)
+        private val sala: TextView = itemView.findViewById(R.id.tvLocal)
+        private val horario: TextView = itemView.findViewById(R.id.tvHorario)
+        private val imagem: CircleImageView = itemView.findViewById(R.id.ivFotoMonitor)
+        private val status: CardView = itemView.findViewById(R.id.ivStatusMonitor)
         private val context: Context = context
 
         fun bind(item: MonitorData) {
-            Monitor.text = item.nome
-            Sala.text = "Local: ${item.sala} - ${item.predio}"
-            Horario.text = item.horario
+            monitor.text = item.nome
+            sala.text = "Local: ${item.sala} - ${item.predio}"
+            horario.text = item.horario
 
             val storage = FirebaseStorage.getInstance()
             val storageRef = storage.getReferenceFromUrl(item.foto)
 
             storageRef.downloadUrl.addOnSuccessListener {
-                Picasso.with(context).load(it).fit().centerInside().into(Imagem)
+                Picasso.with(context).load(it).fit().centerInside().into(imagem)
             }
             //Picasso.with(context).load(R.drawable.track).into(Status);
         }
