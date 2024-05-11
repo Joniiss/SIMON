@@ -18,12 +18,26 @@
         android:textSize="14sp"
         />
 
+    <TextView
+        android:id="@+id/tvOP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvNomeComentario"
+        android:layout_marginTop="5dp"
+        android:text="OP"
+        android:textStyle="bold"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/azul_escuro"
+        android:textSize="14sp"
+        />
+
     <androidx.cardview.widget.CardView
         android:layout_width="4dp"
         android:layout_height="4dp"
         app:layout_constraintTop_toTopOf="@id/tvNomeComentario"
         app:layout_constraintBottom_toBottomOf="@id/tvNomeComentario"
-        app:layout_constraintStart_toEndOf="@id/tvNomeComentario"
+        app:layout_constraintStart_toEndOf="@id/tvOP"
         android:layout_marginStart="10dp"
         android:backgroundTint="#4E4E4E"
         app:circularflow_radiusInDP="50dp"/>
@@ -34,7 +48,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/tvNomeComentario"
-        app:layout_constraintStart_toEndOf="@id/tvNomeComentario"
+        app:layout_constraintStart_toEndOf="@id/tvOP"
         android:layout_marginTop="5dp"
         android:layout_marginStart="20dp"
         android:text="horas ou data"
