@@ -52,6 +52,8 @@ class ForumFragment : Fragment() {
             findNavController().navigate(R.id.action_forumFragment_to_subjectFragment)
         }
 
+
+
     }
 
     override fun onDestroyView() {

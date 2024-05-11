@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
 
 
 class ForumAdapter(private val mData: List<ForumData>, private val context: Context) : RecyclerView.Adapter<ForumAdapter.ViewHolder>() {
@@ -33,6 +33,10 @@ class ForumAdapter(private val mData: List<ForumData>, private val context: Cont
 
         fun bind(item: ForumData) {
             tituloPost.text = item.nome
+
+            itemView.setOnClickListener{
+                findNavController().navigate(R.id.action_forumFragment2_to_postFragment)
+            }
         }
     }
 }

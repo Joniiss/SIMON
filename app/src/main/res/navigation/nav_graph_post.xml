@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_post"
+    app:startDestination="@id/forumFragment2">
+
+    <fragment
+        android:id="@+id/forumFragment2"
+        android:name="com.app.simon.ForumFragment"
+        android:label="fragment_forum"
+        tools:layout="@layout/fragment_forum" >
+        <action
+            android:id="@+id/action_forumFragment2_to_postFragment"
+            app:destination="@id/postFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.app.simon.PostFragment"
+        android:label="fragment_post"
+        tools:layout="@layout/fragment_post" />
+</navigation>
