@@ -29,7 +29,7 @@ class PostAdapter(private val mData: List<CommentData>, private val context: Con
     }
 
     class ViewHolder(itemView: View, context: Context) : RecyclerView.ViewHolder(itemView) {
-        private val tituloComment: TextView = itemView.findViewById(R.id.tvTituloDentroPost)
+        private val tituloComment: TextView = itemView.findViewById(R.id.tvDescComentario)
 
         fun bind(item: CommentData) {
             tituloComment.text = item.nome

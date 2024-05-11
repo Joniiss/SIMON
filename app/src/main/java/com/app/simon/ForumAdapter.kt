@@ -11,8 +11,7 @@ import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
-
-class ForumAdapter(private val mData: List<ForumData>, private val context: Context) : RecyclerView.Adapter<ForumAdapter.ViewHolder>() {
+class ForumAdapter(private val mData: List<ForumData>, private val context: Context, private val myFragment: Fragment) : RecyclerView.Adapter<ForumAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_forum, parent, false)
@@ -21,7 +20,7 @@ class ForumAdapter(private val mData: List<ForumData>, private val context: Cont
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mData[position]
-        holder.bind(item)
+        holder.bind(item, myFragment)
     }
 
     override fun getItemCount(): Int {
@@ -31,11 +30,11 @@ class ForumAdapter(private val mData: List<ForumData>, private val context: Cont
     class ViewHolder(itemView: View, context: Context) : RecyclerView.ViewHolder(itemView) {
         private val tituloPost: TextView = itemView.findViewById(R.id.tvTituloPost)
 
-        fun bind(item: ForumData) {
+        fun bind(item: ForumData, fragment: Fragment) {
             tituloPost.text = item.nome
 
             itemView.setOnClickListener{
-                findNavController().navigate(R.id.action_forumFragment2_to_postFragment)
+                findNavController(fragment).navigate(R.id.action_forumFragment_to_postFragment)
             }
         }
     }

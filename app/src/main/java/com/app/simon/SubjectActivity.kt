@@ -15,8 +15,6 @@ import com.app.simon.databinding.ActivitySubjectBinding
 
 class SubjectActivity : AppCompatActivity() {
 
-    private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mAdapter: MonitorAdapter
     private lateinit var binding: ActivitySubjectBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +28,10 @@ class SubjectActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        /*
         val user: User = intent.getSerializableExtra("user") as User
         val materia = intent.getStringExtra("materiaSub")
-
-
+        */
     }
 
 }

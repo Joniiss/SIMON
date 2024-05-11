@@ -45,7 +45,7 @@ class ForumFragment : Fragment() {
         lista.add(teste)
         lista.add(teste2)
 
-        mAdapter = ForumAdapter(lista, this.requireContext())
+        mAdapter = ForumAdapter(lista, this.requireContext(), this)
         mRecyclerView.adapter = mAdapter
 
         binding.btnMonitores.setOnClickListener {
