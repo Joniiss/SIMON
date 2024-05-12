@@ -386,7 +386,7 @@
             app:layout_constraintTop_toTopOf="@id/tvHorasContab"
             app:layout_constraintBottom_toBottomOf="@id/tvHorasContab"
             app:layout_constraintStart_toEndOf="@id/tvHorasContab"
-            android:text="16 Horas"
+            android:text="16"
             android:textStyle="bold"
             android:textSize="20sp"
             android:background="@drawable/textbox"

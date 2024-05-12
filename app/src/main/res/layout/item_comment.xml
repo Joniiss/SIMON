@@ -56,6 +56,17 @@
         android:textSize="14sp"
         />
 
+    <ImageView
+        android:id="@+id/tvCheckModeradorComment"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/checkcirc"
+        android:alpha="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+    />
+
     <TextView
         android:id="@+id/tvDescComentario"
         android:layout_width="wrap_content"
@@ -75,7 +86,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:drawableStart="@drawable/upvote"
         android:drawablePadding="-10dp"
-        android:text="12"
+        android:text=""
         android:textOff=""
         android:textOn=""
         android:background="@color/fui_transparent"/>

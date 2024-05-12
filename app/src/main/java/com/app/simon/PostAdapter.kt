@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
@@ -41,6 +42,7 @@ class PostAdapter(private val mData: List<CommentData>,private val user: User, p
         private val autorComment: TextView = itemView.findViewById(R.id.tvNomeComentario)
         private val btnVotos: AppCompatToggleButton = itemView.findViewById(R.id.btnUpvote)
         private val monComment: TextView = itemView.findViewById(R.id.tvOP)
+        private val verificado: ImageView = itemView.findViewById(R.id.tvCheckModeradorComment)
         private val context: Context = context
 
 
@@ -51,8 +53,13 @@ class PostAdapter(private val mData: List<CommentData>,private val user: User, p
             btnVotos.isChecked = false
             btnVotos.text = item.qtdVotos.toString()
 
-            if(item.monitor == "true") {
+            if(item.monitor != "true") {
                 monComment.text = "Monitor"
+                verificado.alpha = 1.0f
+            }
+
+            if(item.aprovado == "true") {
+                verificado.alpha = 1.0f
             }
 
             btnVotos.setOnCheckedChangeListener{ buttonView, isChecked ->
@@ -62,9 +69,10 @@ class PostAdapter(private val mData: List<CommentData>,private val user: User, p
 
 
                     println(user.monitor)
-                    if(user.monitor == "true") {
+                    if(user.monitor != "") {
                         db.collection("Comentarios").document(item.id)
                             .update("qtdVotos", item.qtdVotos, "aprovado", "true")
+                        verificado.alpha = 1.0f
                     } else {
                         db.collection("Comentarios").document(item.id)
                             .update("qtdVotos", item.qtdVotos)
@@ -73,9 +81,10 @@ class PostAdapter(private val mData: List<CommentData>,private val user: User, p
                     item.qtdVotos -= 1
                     btnVotos.textOff = item.qtdVotos.toString()
 
-                    if(user.monitor == "true") {
+                    if(user.monitor != "") {
                         db.collection("Comentarios").document(item.id)
                             .update("qtdVotos", item.qtdVotos, "aprovado", "false")
+                        verificado.alpha = 0.0f
                     } else {
                         db.collection("Comentarios").document(item.id)
                             .update("qtdVotos", item.qtdVotos)

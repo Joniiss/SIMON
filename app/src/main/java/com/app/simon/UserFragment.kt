@@ -19,14 +19,25 @@ import com.app.simon.R
 import com.app.simon.databinding.ActivityLoginBinding
 import com.app.simon.databinding.FragmentUserBinding
 import com.app.simon.ui.main.MainViewModel
+import com.beust.klaxon.Klaxon
+import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.functions.FirebaseFunctions
+import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.google.gson.GsonBuilder
 import com.squareup.picasso.Picasso
 import java.io.File
 import java.io.Serializable
+import java.time.LocalDate
+import java.time.LocalDateTime
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.DurationUnit
 
 
 class UserFragment : Fragment() {
@@ -35,6 +46,8 @@ class UserFragment : Fragment() {
 
     private var db = FirebaseFirestore.getInstance()
     private val fireUser = Firebase.auth.currentUser
+    private lateinit var functions: FirebaseFunctions
+    private val gson = GsonBuilder().enableComplexMapKeySerialization().create()
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: MyAdapter
@@ -63,7 +76,6 @@ class UserFragment : Fragment() {
                 Snackbar.make(binding.root, "Não foi possível iniciar a câmera", Snackbar.LENGTH_LONG).show()
             }
         }
-
     override fun onCreateView(
         inflater: LayoutInflater,
             container: ViewGroup?,
@@ -76,6 +88,7 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        functions = Firebase.functions("southamerica-east1")
         val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
 
         loadPic(user.foto)
@@ -84,6 +97,14 @@ class UserFragment : Fragment() {
         binding.etEmail.hint = user.email
         binding.etPredio.hint = user.predio
         binding.etSala.hint = user.sala
+
+        db.collection("Monitores").document(user.monitor)
+            .get()
+            .addOnCompleteListener { doc ->
+                binding.tvHorasContabInput.text = "%.2f".format(doc.result.data!!["horas"])
+            }
+
+
 
 
         if(user.status == "true") {
@@ -99,10 +120,82 @@ class UserFragment : Fragment() {
             if(isChecked) {
                 binding.tvToggle.text = "Disponível"
                 user.status = "true"
+                attFirestore("status", user.status)
+
+
+                db.collection("Monitores").document(user.monitor)
+                    .get()
+                    .addOnCompleteListener { doc ->
+                        println(doc.result.data!!["monthValue"])
+                        val month = doc.result.data!!["monthValue"] as Long
+
+                        if(month.toInt() != LocalDateTime.now().monthValue) {
+                            db.collection("Monitores").document(user.monitor)
+                                .update("monthValue", LocalDateTime.now().monthValue,
+                                    "horas", 0)
+
+                            db.collection("LogHoras").add(logHorasData(uid= user.uid))
+                        } else {
+                            db.collection("LogHoras").add(logHorasData(uid= user.uid))
+                        }
+                    }
+
+
+
             } else {
                 binding.tvToggle.text = "Indisponível"
                 user.status = "false"
-            }
+                attFirestore("status", user.status)
+
+                getLogHoras(user.uid)
+                    .addOnCompleteListener { task ->
+                        if(task.isSuccessful) {
+                            val genericResp = gson.fromJson(
+                                task.result,
+                                FunctionsGenericResponse::class.java
+                            )
+
+                            if(genericResp.payload.toString() != "{}") {
+                                val log = Klaxon()
+                                    .parse<logHorasData>(genericResp.payload.toString())
+
+                                // Mandar o monthValue e o milis atual
+
+                                val durac = System.currentTimeMillis() - log!!.millis
+                                val aa = durac.milliseconds
+                                Toast.makeText(context, aa.toString(DurationUnit.SECONDS, 2), Toast.LENGTH_SHORT).show()
+
+                                val horasN = aa.toDouble(DurationUnit.HOURS)
+
+                                db.collection("Monitores").document(user.monitor)
+                                    .get()
+                                    .addOnCompleteListener { doc ->
+                                        val horas = doc.result.data!!["horas"] as Double
+                                        val calcHoras = horas+ horasN
+                                        db.collection("Monitores").document(user.monitor)
+                                            .update("horas", calcHoras)
+
+                                        binding.tvHorasContabInput.text = "%.2f".format(calcHoras)
+                                    }
+
+
+
+
+                                val teste = LocalDateTime.now().monthValue
+                                val milis2 = System.currentTimeMillis()
+                                //val durac = milis2 - milis
+                                val tes: Duration = durac.milliseconds
+                                //Toast.makeText(context, tes.toString(DurationUnit.HOURS, 2), Toast.LENGTH_SHORT).show()
+                                //Toast.makeText(context, "${teste.monthValue}", Toast.LENGTH_SHORT).show()
+                                //Toast.makeText(context, "${System.currentTimeMillis()}", Toast.LENGTH_SHORT).show()
+
+
+                            } else {
+                                Toast.makeText(context, "Erro ao obter horas", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
         }
 
         binding.btnChangePhoto.setOnClickListener {
@@ -198,14 +291,13 @@ class UserFragment : Fragment() {
         val storage = FirebaseStorage.getInstance()
         //val storageRef1 = storage.getReferenceFromUrl("gs://simon-12985.appspot.com/perfis/default.jpeg")
         val storageRef1 = storage.getReferenceFromUrl(foto)
-        Toast.makeText(context, storageRef1.toString(), Toast.LENGTH_SHORT).show()
         val localFile1 = File.createTempFile("images", "jpg")
 
-        storageRef1.downloadUrl.addOnSuccessListener { it ->
+        /*storageRef1.downloadUrl.addOnSuccessListener { it ->
 
             Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
 
-        }
+        }*/
 
         storageRef1.getFile(localFile1).addOnSuccessListener {
             // Local temp file has been created
@@ -220,7 +312,7 @@ class UserFragment : Fragment() {
 
         }.addOnFailureListener {
             // Handle any errors
-            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Erro ao baixar imagem: ${it.message}",Toast.LENGTH_LONG).show()
         }
     }
 
@@ -254,6 +346,19 @@ class UserFragment : Fragment() {
         attFirestore("status", status)
     }
 
+    private fun getLogHoras(uid: String): Task<String> {
+
+        val data = hashMapOf(
+            "uid" to uid
+        )
+        return functions
+            .getHttpsCallable("getLogHoras")
+            .call(data)
+            .continueWith { task ->
+                val res = gson.toJson(task.result?.data)
+                res
+            }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
