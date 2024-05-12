@@ -33,5 +33,8 @@
         <action
             android:id="@+id/action_postFragment_to_forumFragment"
             app:destination="@id/forumFragment" />
+        <argument
+            android:name="post"
+            app:argType="com.app.simon.ForumData" />
     </fragment>
 </navigation>

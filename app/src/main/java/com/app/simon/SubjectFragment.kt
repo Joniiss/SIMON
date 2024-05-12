@@ -75,29 +75,15 @@ class SubjectFragment : Fragment() {
                         FunctionsGenericResponse::class.java
                     )
 
-                    //Toast.makeText(this.context, genericResp.payload.toString(), Toast.LENGTH_LONG).show()
-                    println(genericResp.payload)
-
-                    //var teste = genericResp.payload.toString() as ArrayList<String>
-                    //println(teste[0])
-
-                    val monitor = Klaxon()
-                        .parseArray<MonitorData>(genericResp.payload.toString())
-                    val teste: MutableList<MonitorData> = emptyList<MonitorData>().toMutableList()
-
-                    monitor?.get(0)?.let { teste.add(it) }
-                    teste.add(MonitorData("José Henrique", "", "13:30-19:00", "H12", "208", "gs://simon-12985.appspot.com/perfis/teste.jpeg", "2", "a", "true"))
-
-                    mAdapter = MonitorAdapter(teste, this.requireContext())
-                    mRecyclerView.adapter = mAdapter
-
-                    /*mItems.add(exemplo)
-                    mItems.add(exemplo2)
-                    monitor!!.forEach { mon ->
-                        mItems.add(mon)
+                    if(genericResp.payload.toString() != "{}") {
+                        val monitor = Klaxon()
+                            .parseArray<MonitorData>(genericResp.payload.toString())
+                        
+                        mAdapter = MonitorAdapter(monitor!!, this.requireContext())
+                        mRecyclerView.adapter = mAdapter
+                    } else {
+                        Toast.makeText(context, "Essa matéria n tem monitores!", Toast.LENGTH_SHORT).show()
                     }
-                    mAdapter = MonitorAdapter(mItems)
-                    mRecyclerView.adapter = mAdapter*/
                 }
             }
 

@@ -16,6 +16,7 @@ data class User(
     var predio: String = "",
     var sala: String = "",
     var status: String = "false",
-    var foto: String = ""
+    var foto: String = "",
+    var monitor: String = "false"
     //val materiasMonitor: List<String>?
 ) : Serializable

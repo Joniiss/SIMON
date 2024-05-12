@@ -4,7 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
@@ -29,12 +32,22 @@ class ForumAdapter(private val mData: List<ForumData>, private val context: Cont
 
     class ViewHolder(itemView: View, context: Context) : RecyclerView.ViewHolder(itemView) {
         private val tituloPost: TextView = itemView.findViewById(R.id.tvTituloPost)
+        private val qtdComent: TextView = itemView.findViewById(R.id.tvQuantComentario)
+        private val data: TextView = itemView.findViewById(R.id.tvData)
+        private val verificado: ImageView = itemView.findViewById(R.id.tvCheckModerador)
 
         fun bind(item: ForumData, fragment: Fragment) {
-            tituloPost.text = item.nome
+            tituloPost.text = item.titulo
+            qtdComent.text = "${item.qtdComent} comentários"
+            data.text = item.data
+
+            if(item.aprovado == "false") {
+                verificado.alpha = 0.0f
+            }
 
             itemView.setOnClickListener{
-                findNavController(fragment).navigate(R.id.action_forumFragment_to_postFragment)
+                val bundle = bundleOf("post" to item)
+                findNavController(fragment).navigate(R.id.action_forumFragment_to_postFragment, bundle)
             }
         }
     }

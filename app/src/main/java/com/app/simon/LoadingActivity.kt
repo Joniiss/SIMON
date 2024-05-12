@@ -82,6 +82,8 @@ class LoadingActivity : AppCompatActivity() {
                                         user.nome.split(" ")[0]
                                     user.foto =
                                         document["foto"].toString()
+                                    user.monitor =
+                                        document["monitor"].toString()
                                 }
                                 val i = Intent(this, MainActivity::class.java)
                                 i.putExtra("user", user as Serializable)

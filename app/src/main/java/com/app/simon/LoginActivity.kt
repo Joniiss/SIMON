@@ -122,6 +122,8 @@ class LoginActivity : AppCompatActivity() {
                                                         result.nome.split(" ")[0]
                                                     result.foto =
                                                         document["foto"].toString()
+                                                    result.monitor =
+                                                        document["monitor"].toString()
                                                 }
                                                 val i = Intent(this, MainActivity::class.java)
                                                 i.putExtra("user", result as Serializable)

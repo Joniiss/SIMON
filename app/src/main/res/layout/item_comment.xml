@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvNomeComentario"
         android:layout_marginTop="5dp"
-        android:text="OP"
+        android:text=""
         android:textStyle="bold"
         android:layout_marginStart="4dp"
         android:textColor="@color/azul_escuro"
@@ -67,7 +67,7 @@
         android:textSize="16sp"
         />
     
-    <androidx.appcompat.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatToggleButton
         android:id="@+id/btnUpvote"
         android:layout_width="55dp"
         android:layout_height="30dp"
@@ -76,6 +76,8 @@
         android:drawableStart="@drawable/upvote"
         android:drawablePadding="-10dp"
         android:text="12"
+        android:textOff=""
+        android:textOn=""
         android:background="@color/fui_transparent"/>
     
     <View

@@ -1,11 +1,13 @@
 package com.app.simon
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
@@ -40,6 +42,10 @@ class MonitorAdapter(private val mData: List<MonitorData>, private val context: 
             monitor.text = item.nome
             sala.text = "Local: ${item.sala} - ${item.predio}"
             horario.text = item.horario
+
+            if(item.status == "true") {
+                status.setCardBackgroundColor(Color.parseColor("#48d41e"))
+            }
 
             val storage = FirebaseStorage.getInstance()
             val storageRef = storage.getReferenceFromUrl(item.foto)

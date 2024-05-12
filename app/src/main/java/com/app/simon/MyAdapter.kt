@@ -36,7 +36,6 @@ class MyAdapter(private val mData: MutableList<SubjectData>) : RecyclerView.Adap
                 iSubject.putExtra("user", item.user)
                 iSubject.putExtra("materiaSub", item.materia)
                 itemView.context.startActivity(iSubject)
-
             }
         }
     }
