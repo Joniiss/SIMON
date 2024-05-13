@@ -32,6 +32,7 @@ import com.google.gson.GsonBuilder
 import com.squareup.picasso.Picasso
 import java.io.File
 import java.io.Serializable
+import java.lang.ClassCastException
 import java.time.LocalDate
 import java.time.LocalDateTime
 import kotlin.time.Duration
@@ -49,24 +50,7 @@ class UserFragment : Fragment() {
     private lateinit var functions: FirebaseFunctions
     private val gson = GsonBuilder().enableComplexMapKeySerialization().create()
 
-    private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mAdapter: MyAdapter
-    private lateinit var mItems: MutableList<String>
-    private lateinit var tvNome: TextView
-
     private val binding get() = _binding!!
-//    companion object {
-//        fun newInstance() = UserFragment()
-//    }
-
-    //private val viewModel: MainViewModel by viewModels()
-
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = FragmentUserBinding.inflate(layoutInflater)
-        binding.tvNome.text = "teste";
-        // TODO: Use the ViewModel
-    }*/
 
     private val cameraProviderResult =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
@@ -101,11 +85,13 @@ class UserFragment : Fragment() {
         db.collection("Monitores").document(user.monitor)
             .get()
             .addOnCompleteListener { doc ->
-                binding.tvHorasContabInput.text = "%.2f".format(doc.result.data!!["horas"])
+                if(doc.result.data!!["horas"].toString() == "0") {
+                    binding.tvHorasContabInput.text = "0.00"
+                } else {
+                    binding.tvHorasContabInput.text = "%.2f".format(doc.result.data!!["horas"])
+                }
+
             }
-
-
-
 
         if(user.status == "true") {
             binding.tbtnStatus.isChecked = true
@@ -126,13 +112,12 @@ class UserFragment : Fragment() {
                 db.collection("Monitores").document(user.monitor)
                     .get()
                     .addOnCompleteListener { doc ->
-                        println(doc.result.data!!["monthValue"])
-                        val month = doc.result.data!!["monthValue"] as Long
+                        val month = doc.result.data!!["monthValue"]
 
-                        if(month.toInt() != LocalDateTime.now().monthValue) {
+                        if(month.toString() != LocalDateTime.now().monthValue.toString()) {
                             db.collection("Monitores").document(user.monitor)
                                 .update("monthValue", LocalDateTime.now().monthValue,
-                                    "horas", 0)
+                                    "horas", 0.0f)
 
                             db.collection("LogHoras").add(logHorasData(uid= user.uid))
                         } else {
@@ -159,37 +144,31 @@ class UserFragment : Fragment() {
                                 val log = Klaxon()
                                     .parse<logHorasData>(genericResp.payload.toString())
 
-                                // Mandar o monthValue e o milis atual
+                                val intervalo = System.currentTimeMillis() - log!!.millis
+                                val tempo = intervalo.milliseconds
+                                Toast.makeText(context, "${tempo.toString(DurationUnit.HOURS,
+                                    2)} horas adicionadas",
+                                    Toast.LENGTH_SHORT).show()
 
-                                val durac = System.currentTimeMillis() - log!!.millis
-                                val aa = durac.milliseconds
-                                Toast.makeText(context, aa.toString(DurationUnit.SECONDS, 2), Toast.LENGTH_SHORT).show()
-
-                                val horasN = aa.toDouble(DurationUnit.HOURS)
+                                val horasN = tempo.toDouble(DurationUnit.HOURS)
 
                                 db.collection("Monitores").document(user.monitor)
                                     .get()
                                     .addOnCompleteListener { doc ->
-                                        val horas = doc.result.data!!["horas"] as Double
-                                        val calcHoras = horas+ horasN
+                                        var horas = 0.0
+                                        try {
+                                            horas = (doc.result.data!!["horas"] as Long).toDouble()
+                                        } catch (e: ClassCastException) {
+                                            horas = doc.result.data!!["horas"] as Double
+                                        }
+
+                                        val calcHoras = horas + horasN
+
                                         db.collection("Monitores").document(user.monitor)
                                             .update("horas", calcHoras)
 
                                         binding.tvHorasContabInput.text = "%.2f".format(calcHoras)
                                     }
-
-
-
-
-                                val teste = LocalDateTime.now().monthValue
-                                val milis2 = System.currentTimeMillis()
-                                //val durac = milis2 - milis
-                                val tes: Duration = durac.milliseconds
-                                //Toast.makeText(context, tes.toString(DurationUnit.HOURS, 2), Toast.LENGTH_SHORT).show()
-                                //Toast.makeText(context, "${teste.monthValue}", Toast.LENGTH_SHORT).show()
-                                //Toast.makeText(context, "${System.currentTimeMillis()}", Toast.LENGTH_SHORT).show()
-
-
                             } else {
                                 Toast.makeText(context, "Erro ao obter horas", Toast.LENGTH_SHORT).show()
                             }
@@ -289,33 +268,15 @@ class UserFragment : Fragment() {
 
     private fun loadPic(foto: String) {
         val storage = FirebaseStorage.getInstance()
-        //val storageRef1 = storage.getReferenceFromUrl("gs://simon-12985.appspot.com/perfis/default.jpeg")
         val storageRef1 = storage.getReferenceFromUrl(foto)
         val localFile1 = File.createTempFile("images", "jpg")
 
-        /*storageRef1.downloadUrl.addOnSuccessListener { it ->
-
-            Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
-
-        }*/
-
         storageRef1.getFile(localFile1).addOnSuccessListener {
-            // Local temp file has been created
-            //val bitmap = BitmapFactory.decodeFile(localFile1.absolutePath)
             Picasso.with(context).load("file:" + localFile1.absolutePath).fit().centerInside().into(binding.ivPerfil)
-
-
-            /*
-            val bitmap = BitmapFactory.decodeFile(localFile1.absolutePath)
-            Picasso.with(context).load("file:" + localFile1.absolutePath).fit().centerInside().into(binding.ivPerfil)
-            */
-
         }.addOnFailureListener {
-            // Handle any errors
             Toast.makeText(context, "Erro ao baixar imagem: ${it.message}",Toast.LENGTH_LONG).show()
         }
     }
-
 
     private fun attFirestore(campo: String, dado: String) {
         db.collection("Alunos").whereEqualTo("uid", fireUser!!.uid)
