@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.app.simon.databinding.FragmentPerfilMonitorBinding
 import com.app.simon.databinding.FragmentSubjectBinding
+import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 
 class PerfilMonitorFragment : Fragment() {
 
@@ -31,6 +33,13 @@ class PerfilMonitorFragment : Fragment() {
 
         if(monitor.status == "true"){
             binding.ivSmallerCam.setCardBackgroundColor(Color.parseColor("#48d41e"))
+        }
+
+        val storage = FirebaseStorage.getInstance()
+        val storageRef = storage.getReferenceFromUrl(monitor.foto)
+
+        storageRef.downloadUrl.addOnSuccessListener {
+            Picasso.with(context).load(it).fit().centerInside().into(binding.ivPerfil)
         }
 
 
