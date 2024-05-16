@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/PerfilMonitor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PerfilMonitorFragment"
+    android:scrollbarSize="0dip">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--    <androidx.cardview.widget.CardView-->
+        <!--        android:id="@+id/cvTopo"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="90dp"-->
+        <!--        android:backgroundTint="@color/amarelo"-->
+        <!--        app:layout_constraintTop_toTopOf="parent"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"/>-->
+
+        <!--    <TextView-->
+        <!--        android:id="@+id/tvLogo"-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        app:layout_constraintTop_toTopOf="parent"-->
+        <!--        app:layout_constraintBottom_toBottomOf="@id/cvTopo"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        android:layout_marginEnd="15dp"-->
+        <!--        android:elevation="4dp"-->
+        <!--        android:text="Olá %NOME%"-->
+        <!--        android:textSize="20sp"-->
+        <!--        android:textColor="@color/azul_escuro"-->
+        <!--        android:textStyle="bold"-->
+        <!--        />-->
+
+        <!--    <Button-->
+        <!--        android:layout_width="wrap_content"-->
+        <!--        android:layout_height="60dp"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toTopOf="@id/cvTopo"-->
+        <!--        app:layout_constraintBottom_toBottomOf="@id/cvTopo"-->
+        <!--        android:layout_marginStart="15dp"-->
+        <!--        android:background="@color/fui_transparent"-->
+        <!--        android:textSize="16sp"-->
+        <!--        android:textColor="@color/azul_escuro"-->
+        <!--        android:text="@string/voltar"/>-->
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivPerfil"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="35dp"
+            android:backgroundTint="@color/azul_escuro"
+            android:src="@drawable/fotoperfil"
+            app:civ_border_width="4dp"
+            app:civ_border_color="@color/azul_escuro"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ivSmallerCam"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="@id/ivPerfil"
+            app:layout_constraintEnd_toEndOf="@id/ivPerfil"
+            app:cardBackgroundColor="#e81e1e"
+            app:cardCornerRadius="50dp"
+            />
+
+        <TextView
+            android:id="@+id/tvNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/ivPerfil"
+            app:layout_constraintEnd_toEndOf="@id/ivPerfil"
+            app:layout_constraintTop_toBottomOf="@id/ivPerfil"
+            android:layout_marginTop="15sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:text="João Lisan Al Gaib Muadib"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            />
+
+        <TextView
+            android:id="@+id/tvContato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvNome"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="30dp"
+            android:text="Contato"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+
+        <EditText
+            android:id="@+id/etCel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/textbox"
+            android:drawableStart="@drawable/whatsapp"
+            android:drawablePadding="6dp"
+            android:enabled="false"
+            android:maxLines="1"
+            android:minHeight="45dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvContato" />
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
+            app:layout_constraintTop_toBottomOf="@id/etCel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/textbox"
+            android:drawableStart="@drawable/email"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:drawablePadding="6dp"
+            android:enabled="false"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+
+        <TextView
+            android:id="@+id/tvPredio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/etPredio"
+            app:layout_constraintTop_toBottomOf="@id/etEmail"
+            android:layout_marginTop="35dp"
+            android:text="Prédio"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+
+        <EditText
+            android:id="@+id/etPredio"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
+            app:layout_constraintTop_toBottomOf="@id/tvPredio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/etSala"
+            android:background="@drawable/textbox"
+            android:drawableStart="@drawable/building"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:drawablePadding="6dp"
+            android:enabled="false"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+
+        <TextView
+            android:id="@+id/tvSala"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/etSala"
+            app:layout_constraintTop_toTopOf="@id/tvPredio"
+            android:layout_marginTop="0dp"
+            android:text="Sala"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+
+
+        <EditText
+            android:id="@+id/etSala"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
+            app:layout_constraintTop_toBottomOf="@id/tvPredio"
+            app:layout_constraintStart_toEndOf="@id/etPredio"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/textbox"
+            android:drawableStart="@drawable/room"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:drawablePadding="6dp"
+            android:enabled="false"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+
+        <TextView
+            android:id="@+id/tvHorario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/etPredio"
+            app:layout_constraintTop_toBottomOf="@id/etPredio"
+            android:layout_marginTop="20dp"
+            android:text="Horário"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/tvDe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/etPredio"
+            app:layout_constraintTop_toBottomOf="@id/tvHorario"
+            android:layout_marginTop="5dp"
+            android:text="De"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/tvAte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/etHorarioAte"
+            app:layout_constraintTop_toBottomOf="@id/tvHorario"
+            android:layout_marginTop="5dp"
+            android:text="Até"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
+
+        <EditText
+            android:id="@+id/etHorarioDe"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:minHeight="45dp"
+            app:layout_constraintTop_toBottomOf="@id/tvDe"
+            app:layout_constraintStart_toStartOf="@id/tvDe"
+            android:background="@drawable/textbox"
+            android:drawableStart="@drawable/hours"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:drawablePadding="6dp"
+            android:enabled="false"
+            android:maxLines="1"
+            android:singleLine="true"
+            />
+
+        <EditText
+            android:id="@+id/etHorarioAte"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textbox"
+            android:drawableStart="@drawable/hours"
+            android:drawablePadding="6dp"
+            android:enabled="false"
+            android:maxLines="1"
+            android:minHeight="45dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toEndOf="@id/etHorarioDe"
+            app:layout_constraintTop_toBottomOf="@id/tvDe" />
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

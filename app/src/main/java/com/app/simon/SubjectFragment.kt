@@ -79,7 +79,7 @@ class SubjectFragment : Fragment() {
                         val monitor = Klaxon()
                             .parseArray<MonitorData>(genericResp.payload.toString())
                         
-                        mAdapter = MonitorAdapter(monitor!!, this.requireContext())
+                        mAdapter = MonitorAdapter(monitor!!, this.requireContext(), this)
                         mRecyclerView.adapter = mAdapter
                     } else {
                         Toast.makeText(context, "Essa matéria n tem monitores!", Toast.LENGTH_SHORT).show()

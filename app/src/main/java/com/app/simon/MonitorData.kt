@@ -1,6 +1,8 @@
 package com.app.simon
 
-data class MonitorData(
+import java.io.Serializable
+
+data class MonitorData (
     var nome: String = "",
     var local: String = "",
     var horario: String,
@@ -10,4 +12,5 @@ data class MonitorData(
     var celular: String,
     var email: String,
     var status: String
-)
+): Serializable
+

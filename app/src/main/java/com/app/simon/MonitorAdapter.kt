@@ -8,13 +8,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
 
-class MonitorAdapter(private val mData: List<MonitorData>, private val context: Context) : RecyclerView.Adapter<MonitorAdapter.ViewHolder>() {
+class MonitorAdapter(private val mData: List<MonitorData>, private val context: Context, private val myFragment: Fragment) : RecyclerView.Adapter<MonitorAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_monitor, parent, false)
@@ -23,7 +26,7 @@ class MonitorAdapter(private val mData: List<MonitorData>, private val context: 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mData[position]
-        holder.bind(item)
+        holder.bind(item, myFragment)
     }
 
     override fun getItemCount(): Int {
@@ -38,7 +41,7 @@ class MonitorAdapter(private val mData: List<MonitorData>, private val context: 
         private val status: CardView = itemView.findViewById(R.id.ivStatusMonitor)
         private val context: Context = context
 
-        fun bind(item: MonitorData) {
+        fun bind(item: MonitorData, fragment: Fragment) {
             monitor.text = item.nome
             sala.text = "Local: ${item.sala} - ${item.predio}"
             horario.text = item.horario
@@ -52,6 +55,12 @@ class MonitorAdapter(private val mData: List<MonitorData>, private val context: 
 
             storageRef.downloadUrl.addOnSuccessListener {
                 Picasso.with(context).load(it).fit().centerInside().into(imagem)
+            }
+
+            itemView.setOnClickListener{
+                val bundle = bundleOf("monitor" to item)
+                NavHostFragment.findNavController(fragment)
+                    .navigate(R.id.action_subjectFragment_to_perfilMonitorFragment, bundle)
             }
             //Picasso.with(context).load(R.drawable.track).into(Status);
         }
