@@ -38,13 +38,14 @@ class MonitorAdapter(private val mData: List<MonitorData>, private val context: 
         private val sala: TextView = itemView.findViewById(R.id.tvLocal)
         private val horario: TextView = itemView.findViewById(R.id.tvHorario)
         private val imagem: CircleImageView = itemView.findViewById(R.id.ivFotoMonitor)
-        private val status: CardView = itemView.findViewById(R.id.ivStatusMonitor)
+        private val status: CardView = itemView.findViewById(R.id.ivStatusItemMonitor)
         private val context: Context = context
 
         fun bind(item: MonitorData, fragment: Fragment) {
             monitor.text = item.nome
             sala.text = "Local: ${item.sala} - ${item.predio}"
             horario.text = item.horario
+
 
             if(item.status == "true") {
                 status.setCardBackgroundColor(Color.parseColor("#48d41e"))

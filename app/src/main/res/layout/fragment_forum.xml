@@ -52,7 +52,8 @@
         app:layout_constraintStart_toEndOf="@id/btnMonitores"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Fórum"
-        android:textColor="@color/white"
+        android:textColor="@color/amarelo"
+        android:drawableTint="@color/amarelo"
         android:drawableEnd="@drawable/forum"
         android:background="@drawable/ripple_effect"
         android:paddingHorizontal="60dp"
@@ -65,6 +66,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginVertical="60dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/fbtnAddPost"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toTopOf="@id/btnForum"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/rounded_button"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:drawableStart="@drawable/add_forum"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

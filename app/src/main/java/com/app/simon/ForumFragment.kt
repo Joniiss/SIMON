@@ -102,6 +102,9 @@ class ForumFragment : Fragment() {
             findNavController().navigate(R.id.action_forumFragment_to_subjectFragment)
         }
 
+        binding.fbtnAddPost.setOnClickListener {
+            findNavController().navigate(R.id.action_forumFragment_to_newPostFragment)
+        }
 
 
     }

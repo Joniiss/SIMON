@@ -18,7 +18,7 @@
         />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/ivStatusMonitor"
+        android:id="@+id/ivStatusItemMonitor"
         android:layout_width="20dp"
         android:layout_height="20dp"
         app:layout_constraintEnd_toEndOf="@id/ivFotoMonitor"

@@ -38,7 +38,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnForum"
         android:text="Monitores"
-        android:textColor="@color/white"
+        android:textColor="@color/amarelo"
+        android:drawableTint="@color/amarelo"
         android:drawableRight="@drawable/monitor"
         android:background="@drawable/ripple_effect"
         android:paddingHorizontal="46dp"
@@ -67,5 +68,6 @@
         app:layout_constraintBottom_toBottomOf="@id/cvFooter"
         app:layout_constraintTop_toBottomOf="@id/tvTituloMateria"
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

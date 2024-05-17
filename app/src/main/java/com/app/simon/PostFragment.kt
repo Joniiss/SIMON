@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -51,7 +53,10 @@ class PostFragment : Fragment() {
         binding.tvUsuario.text = post.autor
 
 
-
+        binding.fbtnAddComment.setOnClickListener {
+            val bundle = bundleOf("post" to post)
+            findNavController().navigate(R.id.action_postFragment_to_newCommentFragment, bundle)
+        }
 
 
         mRecyclerView = binding.rvListaComentario
