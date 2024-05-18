@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.simon.MyAdapter
@@ -58,6 +60,11 @@ class MainFragment : Fragment() {
 
         mAdapter = MyAdapter(mItems)
         mRecyclerView.adapter = mAdapter
+
+        binding.btnMateriasMonitoradas.setOnClickListener {
+            val bundle = bundleOf("post" to mItems)
+            findNavController().navigate(R.id.action_mainFragment_to_materiasMonitoradasFragment, bundle)
+        }
     }
 
     override fun onDestroyView() {

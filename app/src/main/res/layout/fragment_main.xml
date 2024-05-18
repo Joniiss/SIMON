@@ -21,6 +21,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintTop_toBottomOf="parent"
+        android:layout_marginBottom="60dp"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvFooter"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardBackgroundColor="@color/azul_escuro"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnMaterias"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnMateriasMonitoradas"
+        android:text="Matérias"
+        android:textColor="@color/amarelo"
+        android:drawableTint="@color/amarelo"
+        android:drawableRight="@drawable/document"
+        android:background="@drawable/ripple_effect"
+        android:paddingHorizontal="50dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnMateriasMonitoradas"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnMaterias"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Matérias\nmonitoradas"
+        android:textColor="@color/white"
+        android:drawableTint="@color/white"
+        android:drawableRight="@drawable/monitor"
+        android:background="@drawable/ripple_effect"
+        android:paddingHorizontal="35dp"
         />
     <!--        android:layout_marginTop="90dp"-->
 

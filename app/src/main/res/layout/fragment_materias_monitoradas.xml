@@ -5,21 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/subject"
+    android:id="@+id/MatereiasMonitoradas"
     android:theme="@style/Theme.SIMON"
-    tools:context=".SubjectFragment">
-
-    <TextView
-        android:id="@+id/tvTituloMateria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="5dp"
-        android:text="teste"
-        android:textSize="30sp"
-        />
+    tools:context=".MateriasMonitoradasFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvFooter"
@@ -32,43 +20,43 @@
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnMonitores"
+        android:id="@+id/btnMaterias"
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnForum"
-        android:text="Monitores"
+        app:layout_constraintEnd_toStartOf="@id/btnMateriasMonitoradas"
+        android:text="Matérias"
+        android:textColor="@color/white"
+        android:drawableTint="@color/white"
+        android:drawableRight="@drawable/document"
+        android:background="@drawable/ripple_effect"
+        android:paddingHorizontal="50dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnMateriasMonitoradas"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnMaterias"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Matérias\nmonitoradas"
         android:textColor="@color/amarelo"
         android:drawableTint="@color/amarelo"
         android:drawableRight="@drawable/monitor"
         android:background="@drawable/ripple_effect"
-        android:paddingHorizontal="43dp"
-        />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnForum"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="@drawable/ripple_effect"
-        android:drawableEnd="@drawable/forum"
-        android:paddingHorizontal="60dp"
-        android:text="Fórum"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnMonitores"
+        android:paddingHorizontal="35dp"
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListaMonitores"
+        android:id="@+id/rvMateriasMonitoradas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginBottom="62dp"
-        app:layout_constraintBottom_toBottomOf="@id/cvFooter"
-        app:layout_constraintTop_toBottomOf="@id/tvTituloMateria"
+        android:layout_marginTop="0dp"
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

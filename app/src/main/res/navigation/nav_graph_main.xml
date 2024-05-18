@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainFragment_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_materiasMonitoradasFragment"
+            app:destination="@id/materiasMonitoradasFragment" />
     </fragment>
     <fragment
         android:id="@+id/userFragment"
@@ -21,6 +24,18 @@
         tools:layout="@layout/fragment_user">
         <action
             android:id="@+id/action_userFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/materiasMonitoradasFragment"
+        android:name="com.app.simon.MateriasMonitoradasFragment"
+        android:label="fragment_materias_monitoradas"
+        tools:layout="@layout/fragment_materias_monitoradas" >
+        <argument
+            android:name="subjectData"
+            app:argType="com.app.simon.SubjectData" />
+        <action
+            android:id="@+id/action_materiasMonitoradasFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

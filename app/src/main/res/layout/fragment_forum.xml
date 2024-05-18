@@ -24,7 +24,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cvFooter"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="-10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:backgroundTint="@color/azul_escuro"
@@ -32,31 +33,32 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnMonitores"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btnForum"
         android:text="Monitores"
         android:textColor="@color/white"
+        android:drawableTint="@color/white"
         android:drawableRight="@drawable/monitor"
         android:background="@drawable/ripple_effect"
-        android:paddingHorizontal="46dp"
+        android:paddingHorizontal="43dp"
         />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnForum"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btnMonitores"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/ripple_effect"
+        android:drawableEnd="@drawable/forum"
+        android:paddingHorizontal="60dp"
         android:text="Fórum"
         android:textColor="@color/amarelo"
         android:drawableTint="@color/amarelo"
-        android:drawableEnd="@drawable/forum"
-        android:background="@drawable/ripple_effect"
-        android:paddingHorizontal="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnMonitores"
         />
 
     <androidx.recyclerview.widget.RecyclerView
