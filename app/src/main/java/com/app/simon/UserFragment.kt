@@ -50,6 +50,7 @@ class UserFragment : Fragment() {
     private lateinit var functions: FirebaseFunctions
     private val gson = GsonBuilder().enableComplexMapKeySerialization().create()
 
+
     private val binding get() = _binding!!
 
     private val cameraProviderResult =
@@ -81,6 +82,10 @@ class UserFragment : Fragment() {
         binding.etEmail.hint = user.email
         binding.etPredio.hint = user.predio
         binding.etSala.hint = user.sala
+
+        val horario = user.horario.split("-")
+        binding.etHorarioDe.hint = horario[0]
+        binding.etHorarioAte.hint = horario[1]
 
         db.collection("Monitores").document(user.monitor)
             .get()
@@ -262,7 +267,9 @@ class UserFragment : Fragment() {
     }
 
     private fun cameraScreen() {
+        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
         val intentCameraPreview = Intent(requireContext(), CameraActivity::class.java)
+        intentCameraPreview.putExtra("user", user)
         startActivity(intentCameraPreview)
     }
 

@@ -11,8 +11,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.app.simon.databinding.FragmentNewPostBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.util.Date
 
 class NewPostFragment : Fragment() {
+
+    private var db = FirebaseFirestore.getInstance()
 
     private var _binding: FragmentNewPostBinding? = null
 
@@ -28,6 +34,9 @@ class NewPostFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
+        val materia = requireActivity().intent.getStringExtra("materiaSub")
 
         binding.etAddTittle.addTextChangedListener {
             if(binding.etAddComment.text.isNotEmpty() && binding.etAddTittle.text.isNotEmpty()){
@@ -52,10 +61,22 @@ class NewPostFragment : Fragment() {
         }
 
         binding.btnAddPost.setOnClickListener {
+            val data = LocalDate.now()
+            val dataPost = "${data.dayOfMonth}/${data.monthValue}/${data.year}"
+
+            db.collection("Forum")
+                .add(
+                    ForumData(
+                        user.nome,
+                        binding.etAddTittle.text.toString(),
+                        binding.etAddComment.text.toString(),
+                        materia!!,
+                        0 as Integer,
+                        "false",
+                        dataPost,
+                    )
+                )
             findNavController().popBackStack()
         }
-
-
     }
-
 }

@@ -12,8 +12,12 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.app.simon.databinding.FragmentNewCommentBinding
 import com.app.simon.databinding.FragmentNewPostBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import java.time.LocalDate
 
 class NewCommentFragment : Fragment() {
+
+    private var db = FirebaseFirestore.getInstance()
 
     private var _binding: FragmentNewCommentBinding? = null
 
@@ -31,6 +35,7 @@ class NewCommentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val post = arguments?.getSerializable("post") as ForumData
+        val user = arguments?.getSerializable("user") as User
 
         binding.tvTituloPostComment.text = post.titulo
 
@@ -46,6 +51,28 @@ class NewCommentFragment : Fragment() {
         }
 
         binding.btnAddPost.setOnClickListener {
+            val data = LocalDate.now()
+            val dataPost = "${data.dayOfMonth}/${data.monthValue}/${data.year}"
+
+            var monitor = ""
+            if(user.monitor == "") {
+                monitor = "false"
+            } else {
+                monitor = "true"
+            }
+
+            db.collection("Comentarios")
+                .add(
+                    CommentData(
+                        user.nome,
+                        dataPost,
+                        monitor,
+                        post.id,
+                        0,
+                        binding.etAddComment.text.toString(),
+                        "false"
+                    )
+                )
             findNavController().popBackStack()
         }
     }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -30,6 +31,7 @@ class MyAdapter(private val mData: MutableList<SubjectData>) : RecyclerView.Adap
 
         fun bind(item: SubjectData) {
             textView.text = item.materia
+
             itemView.setOnClickListener{
 
                 val iSubject = Intent(itemView.context, SubjectActivity::class.java)

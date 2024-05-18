@@ -54,7 +54,9 @@ class PostFragment : Fragment() {
 
 
         binding.fbtnAddComment.setOnClickListener {
-            val bundle = bundleOf("post" to post)
+            val bundle = bundleOf(
+                "post" to post,
+                "user" to user)
             findNavController().navigate(R.id.action_postFragment_to_newCommentFragment, bundle)
         }
 

@@ -41,14 +41,14 @@ class MateriasMonitoradasFragment : Fragment() {
         mRecyclerView.layoutManager = LinearLayoutManager(activity)
         var mItems: MutableList<SubjectData> = emptyList<SubjectData>().toMutableList()
 
-        for(item : String in user.materias) {
+        for(item : String in user.materiasMonitor) {
             val itemSubject = SubjectData(user, item)
             mItems.add(itemSubject)
         }
 
         val testeItem = SubjectData(user, "Teste Materia Monitorada")
 
-        mItems.add(testeItem)
+        //mItems.add(testeItem)
 
         mAdapter = MateriaMonitoradaAdapter(mItems)
         mRecyclerView.adapter = mAdapter

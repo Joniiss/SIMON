@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+import java.io.File
 
 
 class MonitorAdapter(private val mData: List<MonitorData>, private val context: Context, private val myFragment: Fragment) : RecyclerView.Adapter<MonitorAdapter.ViewHolder>() {
@@ -55,9 +57,21 @@ class MonitorAdapter(private val mData: List<MonitorData>, private val context: 
             val storageRef = storage.getReferenceFromUrl(item.foto)
 
             storageRef.downloadUrl.addOnSuccessListener {
+                Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
                 Picasso.with(context).load(it).fit().centerInside().into(imagem)
-            }
 
+            }
+/*
+            val storage = FirebaseStorage.getInstance()
+            val storageRef1 = storage.getReferenceFromUrl(item.foto)
+            val localFile1 = File.createTempFile("images", "jpg")
+
+            storageRef1.getFile(localFile1).addOnSuccessListener {
+                Picasso.with(context).load("file:" + localFile1.absolutePath).fit().centerInside().into(imagem)
+            }.addOnFailureListener {
+                Toast.makeText(context, "Erro ao baixar imagem: ${it.message}", Toast.LENGTH_LONG).show()
+            }
+*/
             itemView.setOnClickListener{
                 val bundle = bundleOf("monitor" to item)
                 NavHostFragment.findNavController(fragment)

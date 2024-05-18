@@ -53,7 +53,7 @@ class PostAdapter(private val mData: List<CommentData>,private val user: User, p
             btnVotos.isChecked = false
             btnVotos.text = item.qtdVotos.toString()
 
-            if(item.monitor != "true") {
+            if(item.monitor == "true") {
                 monComment.text = "Monitor"
                 verificado.alpha = 1.0f
             }

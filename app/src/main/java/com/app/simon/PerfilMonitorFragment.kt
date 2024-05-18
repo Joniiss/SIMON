@@ -42,14 +42,13 @@ class PerfilMonitorFragment : Fragment() {
             Picasso.with(context).load(it).fit().centerInside().into(binding.ivPerfil)
         }
 
-
-
+        val horario = monitor.horario.split("-")
+        binding.etHorarioDe.hint = horario[0]
+        binding.etHorarioAte.hint = horario[1]
+        binding.tvNome.text = monitor.nome
         binding.etCel.hint = monitor.celular;
         binding.etEmail.hint = monitor.email;
         binding.etSala.hint = monitor.sala;
         binding.etPredio.hint = monitor.predio;
-
-
     }
-
 }

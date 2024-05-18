@@ -17,6 +17,8 @@ import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
 import java.io.Serializable
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class LoadingActivity : AppCompatActivity() {
 
@@ -41,7 +43,6 @@ class LoadingActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
         //auth.signOut()
         val currentUser = auth.currentUser
         functions = Firebase.functions("southamerica-east1")

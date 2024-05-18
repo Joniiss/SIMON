@@ -7,6 +7,6 @@ data class CommentData(
     var post: String,
     var qtdVotos: Int,
     var texto: String,
-    var id: String = "",
-    var aprovado: String
+    var aprovado: String,
+    var id: String = ""
 )
