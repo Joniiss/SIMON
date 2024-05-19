@@ -77,11 +77,11 @@ class CameraFragment : Fragment() {
                 blinkPreview()
             }
             binding.root.postDelayed({
-                salvarFoto(foto)
-            }, 3000)
-            binding.root.postDelayed({
+                user.foto = salvarFoto(foto)
+            }, 1000)
+            /*binding.root.postDelayed({
                 findNavController().popBackStack()
-            }, 2000)
+            }, 10000)*/
             Log.d("Camera","Foto tirada")
         }
     }
@@ -143,21 +143,23 @@ class CameraFragment : Fragment() {
         }, 100)
     }
 
-    private fun salvarFoto(foto: String) {
+    private fun salvarFoto(foto: String): String {
         val user = arguments?.getSerializable("user") as User
 
         val millis = System.currentTimeMillis()
-        Firebase.storage.getReference().child("perfis/img-${millis}.jpeg")
-            .putFile(File(foto).toUri())
         val fotopath = "gs://simon-12985.appspot.com/perfis/img-${millis}.jpeg"
-        db.collection("Alunos").whereEqualTo("uid", Firebase.auth.currentUser!!.uid).get()
-            .addOnSuccessListener { documents ->
-                for(document in documents){
-                    db.collection("Alunos").document(document.id)
-                        .update("foto", fotopath)
-                }
+        Firebase.storage.getReference().child("perfis/img-${millis}.jpeg")
+            .putFile(File(foto).toUri()).addOnCompleteListener {
+                db.collection("Alunos").whereEqualTo("uid", Firebase.auth.currentUser!!.uid).get()
+                    .addOnSuccessListener { documents ->
+                        for(document in documents){
+                            db.collection("Alunos").document(document.id)
+                                .update("foto", fotopath)
+                        }
+                        findNavController().popBackStack()
+                    }
             }
-        user.foto = fotopath
+        return fotopath
     }
 
     override fun onDestroyView() {
