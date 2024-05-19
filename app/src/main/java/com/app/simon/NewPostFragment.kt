@@ -76,7 +76,9 @@ class NewPostFragment : Fragment() {
                         dataPost,
                     )
                 )
-            findNavController().popBackStack()
+            binding.root.postDelayed({
+                findNavController().popBackStack()
+            }, 1000)
         }
     }
 }

@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.app.simon.databinding.FragmentPerfilMonitorBinding
 import com.app.simon.databinding.FragmentSubjectBinding
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
+import java.io.File
 
 class PerfilMonitorFragment : Fragment() {
 
@@ -34,12 +36,22 @@ class PerfilMonitorFragment : Fragment() {
         if(monitor.status == "true"){
             binding.ivSmallerCam.setCardBackgroundColor(Color.parseColor("#48d41e"))
         }
-
+/*
         val storage = FirebaseStorage.getInstance()
         val storageRef = storage.getReferenceFromUrl(monitor.foto)
 
         storageRef.downloadUrl.addOnSuccessListener {
             Picasso.with(context).load(it).fit().centerInside().into(binding.ivPerfil)
+        }
+*/
+        val storage = FirebaseStorage.getInstance()
+        val storageRef1 = storage.getReferenceFromUrl(monitor.foto)
+        val localFile1 = File.createTempFile("images", "jpg")
+
+        storageRef1.getFile(localFile1).addOnSuccessListener {
+            Picasso.with(context).load("file:" + localFile1.absolutePath).fit().centerInside().into(binding.ivPerfil)
+        }.addOnFailureListener {
+            Toast.makeText(context, "Erro ao baixar imagem: ${it.message}", Toast.LENGTH_LONG).show()
         }
 
         val horario = monitor.horario.split("-")

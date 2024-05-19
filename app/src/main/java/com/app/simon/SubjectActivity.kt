@@ -28,10 +28,5 @@ class SubjectActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        /*
-        val user: User = intent.getSerializableExtra("user") as User
-        val materia = intent.getStringExtra("materiaSub")
-        */
     }
-
 }

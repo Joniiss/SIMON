@@ -28,6 +28,7 @@ class MainFragment : Fragment() {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: MyAdapter
     private lateinit var mItems: MutableList<String>
+
     companion object {
         fun newInstance() = MainFragment()
     }

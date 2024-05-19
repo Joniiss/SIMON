@@ -52,7 +52,7 @@ class MonitorAdapter(private val mData: List<MonitorData>, private val context: 
             if(item.status == "true") {
                 status.setCardBackgroundColor(Color.parseColor("#48d41e"))
             }
-
+/*
             val storage = FirebaseStorage.getInstance()
             val storageRef = storage.getReferenceFromUrl(item.foto)
 
@@ -61,7 +61,7 @@ class MonitorAdapter(private val mData: List<MonitorData>, private val context: 
                 Picasso.with(context).load(it).fit().centerInside().into(imagem)
 
             }
-/*
+*/
             val storage = FirebaseStorage.getInstance()
             val storageRef1 = storage.getReferenceFromUrl(item.foto)
             val localFile1 = File.createTempFile("images", "jpg")
@@ -71,7 +71,7 @@ class MonitorAdapter(private val mData: List<MonitorData>, private val context: 
             }.addOnFailureListener {
                 Toast.makeText(context, "Erro ao baixar imagem: ${it.message}", Toast.LENGTH_LONG).show()
             }
-*/
+
             itemView.setOnClickListener{
                 val bundle = bundleOf("monitor" to item)
                 NavHostFragment.findNavController(fragment)

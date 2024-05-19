@@ -104,7 +104,7 @@ class PostFragment : Fragment() {
                             i++
                         }
 
-                        mAdapter = PostAdapter(comRec, user, this.requireContext())
+                        mAdapter = PostAdapter(comRec, user, post, this.requireContext())
                         mRecyclerView.adapter = mAdapter
                     } else {
                         Toast.makeText(context, "Essa matéria n tem comentarios!", Toast.LENGTH_SHORT).show()

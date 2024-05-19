@@ -73,7 +73,9 @@ class NewCommentFragment : Fragment() {
                         "false"
                     )
                 )
-            findNavController().popBackStack()
+            binding.root.postDelayed({
+                findNavController().popBackStack()
+            }, 1000)
         }
     }
 

@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_userFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_userFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/materiasMonitoradasFragment"
@@ -37,5 +40,17 @@
         <action
             android:id="@+id/action_materiasMonitoradasFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.app.simon.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.app.simon.User" />
     </fragment>
 </navigation>

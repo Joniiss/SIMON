@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.simon.MyAdapter
@@ -49,6 +51,19 @@ class UserFragment : Fragment() {
     private val fireUser = Firebase.auth.currentUser
     private lateinit var functions: FirebaseFunctions
     private val gson = GsonBuilder().enableComplexMapKeySerialization().create()
+/*
+    val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            // Do if the permission is granted
+        }
+        else {
+            // Do otherwise
+        }
+    }
+*/
+
 
 
     private val binding get() = _binding!!
@@ -57,6 +72,7 @@ class UserFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.RequestPermission()) {
             if(it) {
                 cameraScreen()
+
             } else {
                 Snackbar.make(binding.root, "Não foi possível iniciar a câmera", Snackbar.LENGTH_LONG).show()
             }
@@ -72,6 +88,8 @@ class UserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         functions = Firebase.functions("southamerica-east1")
         val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
@@ -183,7 +201,10 @@ class UserFragment : Fragment() {
         }
 
         binding.btnChangePhoto.setOnClickListener {
+            val bundle = bundleOf("user" to user)
             cameraProviderResult.launch(Manifest.permission.CAMERA)
+            //cameraProviderResult.launch(Manifest.permission.CAMERA)
+            //findNavController().popBackStack()
         }
 
         binding.btnLogout.setOnClickListener {
@@ -268,9 +289,8 @@ class UserFragment : Fragment() {
 
     private fun cameraScreen() {
         val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
-        val intentCameraPreview = Intent(requireContext(), CameraActivity::class.java)
-        intentCameraPreview.putExtra("user", user)
-        startActivity(intentCameraPreview)
+        val bundle = bundleOf("user" to user)
+        findNavController().navigate(R.id.action_userFragment_to_cameraFragment, bundle)
     }
 
     private fun loadPic(foto: String) {
@@ -327,9 +347,10 @@ class UserFragment : Fragment() {
                 res
             }
     }
-
+/*
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+    */
 }

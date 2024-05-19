@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
 
-class PostAdapter(private val mData: List<CommentData>,private val user: User, private val context: Context) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+class PostAdapter(private val mData: List<CommentData>,private val user: User, private val post: ForumData, private val context: Context) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_comment, parent, false)
@@ -27,7 +27,7 @@ class PostAdapter(private val mData: List<CommentData>,private val user: User, p
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mData[position]
-        holder.bind(item, position, user)
+        holder.bind(item, position, user, post)
     }
 
     override fun getItemCount(): Int {
@@ -46,7 +46,7 @@ class PostAdapter(private val mData: List<CommentData>,private val user: User, p
         private val context: Context = context
 
 
-        fun bind(item: CommentData, position: Int, user: User) {
+        fun bind(item: CommentData, position: Int, user: User, post: ForumData) {
             textComment.text = item.texto
             dataComment.text = item.data
             autorComment.text = item.autor
@@ -73,6 +73,8 @@ class PostAdapter(private val mData: List<CommentData>,private val user: User, p
                         db.collection("Comentarios").document(item.id)
                             .update("qtdVotos", item.qtdVotos, "aprovado", "true")
                         verificado.alpha = 1.0f
+                        db.collection("Forum").document(post.id)
+                            .update("aprovado", "true")
                     } else {
                         db.collection("Comentarios").document(item.id)
                             .update("qtdVotos", item.qtdVotos)
@@ -85,6 +87,8 @@ class PostAdapter(private val mData: List<CommentData>,private val user: User, p
                         db.collection("Comentarios").document(item.id)
                             .update("qtdVotos", item.qtdVotos, "aprovado", "false")
                         verificado.alpha = 0.0f
+                        db.collection("Forum").document(post.id)
+                            .update("aprovado", "false")
                     } else {
                         db.collection("Comentarios").document(item.id)
                             .update("qtdVotos", item.qtdVotos)
