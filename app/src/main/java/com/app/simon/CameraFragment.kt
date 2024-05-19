@@ -78,10 +78,8 @@ class CameraFragment : Fragment() {
             }
             binding.root.postDelayed({
                 user.foto = salvarFoto(foto)
-            }, 1000)
-            /*binding.root.postDelayed({
-                findNavController().popBackStack()
-            }, 10000)*/
+            }, 2000)
+
             Log.d("Camera","Foto tirada")
         }
     }
