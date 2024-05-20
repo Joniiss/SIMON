@@ -10,8 +10,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.app.simon.data.UserData
 import com.app.simon.databinding.ActivityMainBinding
-import com.app.simon.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
 
-        val user = intent.getSerializableExtra("user") as User
+        val user = intent.getSerializableExtra("user") as UserData
 
     }
 
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main)
         val currentFragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
 
-        if (currentFragment is MainFragment) {
+        if (currentFragment is MainFragment || currentFragment is MateriasMonitoradasFragment) {
             AlertDialog.Builder(this)
                 .setMessage("Deseja mesmo sair?")
                 .setPositiveButton("Sim") { _, _ -> super.onBackPressed() }

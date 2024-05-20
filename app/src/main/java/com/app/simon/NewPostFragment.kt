@@ -1,20 +1,17 @@
 package com.app.simon
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.app.simon.databinding.FragmentNewPostBinding
+import com.app.simon.data.ForumData
+import com.app.simon.data.UserData
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.util.Date
 
 class NewPostFragment : Fragment() {
 
@@ -35,7 +32,7 @@ class NewPostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
+        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as UserData
         val materia = requireActivity().intent.getStringExtra("materiaSub")
 
         binding.etAddTittle.addTextChangedListener {

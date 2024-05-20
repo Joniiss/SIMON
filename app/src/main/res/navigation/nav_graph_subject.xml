@@ -41,7 +41,7 @@
             app:destination="@id/forumFragment" />
         <argument
             android:name="post"
-            app:argType="com.app.simon.ForumData" />
+            app:argType="com.app.simon.data.ForumData" />
         <action
             android:id="@+id/action_postFragment_to_newCommentFragment"
             app:destination="@id/newCommentFragment" />
@@ -53,7 +53,7 @@
         tools:layout="@layout/fragment_perfil_monitor" >
         <argument
             android:name="monitor"
-            app:argType="com.app.simon.MonitorData" />
+            app:argType="com.app.simon.data.MonitorData" />
     </fragment>
     <fragment
         android:id="@+id/newPostFragment"
@@ -67,6 +67,6 @@
         tools:layout="@layout/fragment_new_comment" >
         <argument
             android:name="post"
-            app:argType="com.app.simon.ForumData" />
+            app:argType="com.app.simon.data.ForumData" />
     </fragment>
 </navigation>

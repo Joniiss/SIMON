@@ -1,16 +1,17 @@
-package com.app.simon
+package com.app.simon.adapter
+
 import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.app.simon.R
+import com.app.simon.SubjectActivity
+import com.app.simon.data.SubjectData
 
 
-class MyAdapter(private val mData: MutableList<SubjectData>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+class MateriaMonitoradaAdapter(private val mData: List<SubjectData>) : RecyclerView.Adapter<MateriaMonitoradaAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_subject, parent, false)
@@ -31,7 +32,6 @@ class MyAdapter(private val mData: MutableList<SubjectData>) : RecyclerView.Adap
 
         fun bind(item: SubjectData) {
             textView.text = item.materia
-
             itemView.setOnClickListener{
 
                 val iSubject = Intent(itemView.context, SubjectActivity::class.java)

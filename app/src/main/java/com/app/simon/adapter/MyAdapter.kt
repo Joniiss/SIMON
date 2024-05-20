@@ -1,24 +1,19 @@
-package com.app.simon
-
-import android.content.Context
+package com.app.simon.adapter
 import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
+import com.app.simon.R
+import com.app.simon.SubjectActivity
+import com.app.simon.data.SubjectData
 
 
-class MateriaMonitoradaAdapter(private val mData: List<SubjectData>) : RecyclerView.Adapter<MateriaMonitoradaAdapter.ViewHolder>() {
+class MyAdapter(private val mData: MutableList<SubjectData>, private val myFragment: Fragment) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_subject, parent, false)
@@ -27,7 +22,7 @@ class MateriaMonitoradaAdapter(private val mData: List<SubjectData>) : RecyclerV
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mData[position]
-        holder.bind(item)
+        holder.bind(item, myFragment)
     }
 
     override fun getItemCount(): Int {
@@ -37,14 +32,21 @@ class MateriaMonitoradaAdapter(private val mData: List<SubjectData>) : RecyclerV
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textView: TextView = itemView.findViewById(R.id.tvNomeMateria)
 
-        fun bind(item: SubjectData) {
+        fun bind(item: SubjectData, fragment: Fragment) {
             textView.text = item.materia
+
             itemView.setOnClickListener{
 
-                val iSubject = Intent(itemView.context, SubjectActivity::class.java)
-                iSubject.putExtra("user", item.user)
-                iSubject.putExtra("materiaSub", item.materia)
-                itemView.context.startActivity(iSubject)
+//                val iSubject = Intent(itemView.context, SubjectActivity::class.java)
+//                iSubject.putExtra("user", item.user)
+//                iSubject.putExtra("materiaSub", item.materia)
+//                itemView.context.startActivity(iSubject)
+                val bundle = bundleOf(
+                    "user" to item.user,
+                    "materiaSub" to item.materia
+                )
+                NavHostFragment.findNavController(fragment)
+                    .navigate(R.id.action_mainFragment_to_subjectFragment2, bundle)
             }
         }
     }

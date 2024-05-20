@@ -6,35 +6,24 @@ import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.Matrix
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Environment
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.ImageProxy
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import com.app.simon.data.UserData
 import com.app.simon.databinding.ActivityCameraBinding
-import com.app.simon.ui.theme.SIMONTheme
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
-import com.squareup.picasso.Picasso
 import java.io.File
-import java.io.FileOutputStream
 import java.lang.Exception
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -138,7 +127,7 @@ class CameraActivity : ComponentActivity() {
     }
 
     private fun salvarFoto(foto: String) {
-        val user = intent.getSerializableExtra("user") as User
+        val user = intent.getSerializableExtra("user") as UserData
 
         val millis = System.currentTimeMillis()
         Firebase.storage.getReference().child("perfis/img-${millis}.jpeg")

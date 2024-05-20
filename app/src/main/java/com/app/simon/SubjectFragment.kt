@@ -5,17 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.app.simon.databinding.ActivitySubjectBinding
 import com.app.simon.databinding.FragmentSubjectBinding
+import com.app.simon.adapter.MonitorAdapter
+import com.app.simon.data.ForumData
+import com.app.simon.data.MonitorData
+import com.app.simon.data.UserData
 import com.beust.klaxon.Klaxon
 import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
@@ -52,13 +52,13 @@ class SubjectFragment : Fragment() {
 
         functions = Firebase.functions("southamerica-east1")
 
-        val user: User = requireActivity().intent.getSerializableExtra("user") as User
-        val materia = requireActivity().intent.getStringExtra("materiaSub")
+        val materia = arguments?.getString("materiaSub")
+        val user = arguments?.getSerializable("user") as UserData
 
         binding.tvTituloMateria.text = materia
 
         mRecyclerView = binding.rvListaMonitores
-        mRecyclerView.setLayoutManager(LinearLayoutManager(this.context));
+        mRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
 
         var mItems: MutableList<MonitorData> = emptyList<MonitorData>().toMutableList()
 
@@ -67,7 +67,7 @@ class SubjectFragment : Fragment() {
 
         Toast.makeText(context, materia!!, Toast.LENGTH_SHORT).show()
 
-        getMonitores(materia!!)
+        getMonitores(materia)
             .addOnCompleteListener { task ->
                 if(task.isSuccessful) {
                     val genericResp = gson.fromJson(

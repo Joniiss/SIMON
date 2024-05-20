@@ -2,25 +2,18 @@ package com.app.simon
 
 import android.Manifest
 import android.content.Intent
-import android.graphics.BitmapFactory
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.app.simon.MyAdapter
-import com.app.simon.R
-import com.app.simon.databinding.ActivityLoginBinding
 import com.app.simon.databinding.FragmentUserBinding
-import com.app.simon.ui.main.MainViewModel
+import com.app.simon.data.LogHorasData
+import com.app.simon.data.UserData
 import com.beust.klaxon.Klaxon
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
@@ -33,12 +26,8 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.GsonBuilder
 import com.squareup.picasso.Picasso
 import java.io.File
-import java.io.Serializable
 import java.lang.ClassCastException
-import java.time.LocalDate
 import java.time.LocalDateTime
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.DurationUnit
 
@@ -92,7 +81,7 @@ class UserFragment : Fragment() {
 
 
         functions = Firebase.functions("southamerica-east1")
-        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
+        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as UserData
 
         loadPic(user.foto)
         binding.tvNome.text = user.nome
@@ -142,9 +131,9 @@ class UserFragment : Fragment() {
                                 .update("monthValue", LocalDateTime.now().monthValue,
                                     "horas", 0.0f)
 
-                            db.collection("LogHoras").add(logHorasData(uid= user.uid))
+                            db.collection("LogHoras").add(LogHorasData(uid= user.uid))
                         } else {
-                            db.collection("LogHoras").add(logHorasData(uid= user.uid))
+                            db.collection("LogHoras").add(LogHorasData(uid= user.uid))
                         }
                     }
 
@@ -165,7 +154,7 @@ class UserFragment : Fragment() {
 
                             if(genericResp.payload.toString() != "{}") {
                                 val log = Klaxon()
-                                    .parse<logHorasData>(genericResp.payload.toString())
+                                    .parse<LogHorasData>(genericResp.payload.toString())
 
                                 val intervalo = System.currentTimeMillis() - log!!.millis
                                 val tempo = intervalo.milliseconds
@@ -288,7 +277,7 @@ class UserFragment : Fragment() {
     }
 
     private fun cameraScreen() {
-        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
+        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as UserData
         val bundle = bundleOf("user" to user)
         findNavController().navigate(R.id.action_userFragment_to_cameraFragment, bundle)
     }

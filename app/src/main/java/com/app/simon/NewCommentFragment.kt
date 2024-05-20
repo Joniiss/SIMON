@@ -1,17 +1,16 @@
 package com.app.simon
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.app.simon.databinding.FragmentNewCommentBinding
-import com.app.simon.databinding.FragmentNewPostBinding
+import com.app.simon.data.CommentData
+import com.app.simon.data.ForumData
+import com.app.simon.data.UserData
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalDate
 
@@ -35,7 +34,7 @@ class NewCommentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val post = arguments?.getSerializable("post") as ForumData
-        val user = arguments?.getSerializable("user") as User
+        val user = arguments?.getSerializable("user") as UserData
 
         binding.tvTituloPostComment.text = post.titulo
 

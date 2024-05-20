@@ -2,11 +2,9 @@ package com.app.simon
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.app.simon.data.UserData
 import com.beust.klaxon.Klaxon
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -17,8 +15,6 @@ import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
 import java.io.Serializable
-import java.time.LocalDate
-import java.time.LocalDateTime
 
 class LoadingActivity : AppCompatActivity() {
 
@@ -58,7 +54,7 @@ class LoadingActivity : AppCompatActivity() {
                         )
 
                         val user = Klaxon()
-                            .parse<User>(genericResp.payload.toString())
+                            .parse<UserData>(genericResp.payload.toString())
 
                         db.collection("Alunos")
                             .whereEqualTo("uid", "w3qRRACjXpO9z8SNDDnHSkAcQyi2")

@@ -1,9 +1,8 @@
-package com.app.simon
+package com.app.simon.data
 
-import java.io.File
 import java.io.Serializable
 
-data class User(
+data class UserData(
     val periodo: String,
     val curso: String,
     var pNome: String = "",

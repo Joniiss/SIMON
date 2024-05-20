@@ -1,4 +1,4 @@
-package com.app.simon
+package com.app.simon.adapter
 
 import android.content.Context
 import android.graphics.Color
@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
+import com.app.simon.R
+import com.app.simon.data.MonitorData
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView

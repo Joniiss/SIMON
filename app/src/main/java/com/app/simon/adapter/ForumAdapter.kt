@@ -1,4 +1,4 @@
-package com.app.simon
+package com.app.simon.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,13 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.app.simon.R
+import com.app.simon.data.ForumData
 
 class ForumAdapter(private val mData: List<ForumData>, private val context: Context, private val myFragment: Fragment) : RecyclerView.Adapter<ForumAdapter.ViewHolder>() {
 

@@ -1,24 +1,21 @@
-package com.app.simon
+package com.app.simon.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatToggleButton
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.app.simon.R
+import com.app.simon.data.UserData
+import com.app.simon.data.CommentData
+import com.app.simon.data.ForumData
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
 
 
-class PostAdapter(private val mData: List<CommentData>,private val user: User, private val post: ForumData, private val context: Context) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+class PostAdapter(private val mData: List<CommentData>, private val user: UserData, private val post: ForumData, private val context: Context) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_comment, parent, false)
@@ -46,7 +43,7 @@ class PostAdapter(private val mData: List<CommentData>,private val user: User, p
         private val context: Context = context
 
 
-        fun bind(item: CommentData, position: Int, user: User, post: ForumData) {
+        fun bind(item: CommentData, position: Int, user: UserData, post: ForumData) {
             textComment.text = item.texto
             dataComment.text = item.data
             autorComment.text = item.autor

@@ -1,4 +1,4 @@
-package com.app.simon
+package com.app.simon.data
 
 data class CommentData(
     var autor: String,

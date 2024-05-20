@@ -1,20 +1,17 @@
 package com.app.simon
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.simon.databinding.FragmentMateriasMonitoradasBinding
-import com.app.simon.databinding.FragmentNewCommentBinding
-import com.app.simon.databinding.FragmentNewPostBinding
+import com.app.simon.adapter.MateriaMonitoradaAdapter
+import com.app.simon.data.SubjectData
+import com.app.simon.data.UserData
 
 class MateriasMonitoradasFragment : Fragment() {
 
@@ -35,7 +32,7 @@ class MateriasMonitoradasFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
+        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as UserData
 
         mRecyclerView = binding.rvMateriasMonitoradas
         mRecyclerView.layoutManager = LinearLayoutManager(activity)

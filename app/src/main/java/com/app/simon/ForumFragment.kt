@@ -10,13 +10,14 @@ import com.app.simon.databinding.FragmentForumBinding
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.simon.adapter.ForumAdapter
+import com.app.simon.data.ForumData
 import com.beust.klaxon.Klaxon
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
-import java.io.Serializable
 
 class ForumFragment : Fragment() {
 

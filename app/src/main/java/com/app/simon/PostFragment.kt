@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.app.simon.databinding.FragmentForumBinding
+import com.app.simon.adapter.PostAdapter
 import com.app.simon.databinding.FragmentPostBinding
+import com.app.simon.data.CommentData
+import com.app.simon.data.ForumData
+import com.app.simon.data.UserData
 import com.beust.klaxon.Klaxon
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.FirebaseFunctions
@@ -43,7 +45,7 @@ class PostFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //fazer tudo aqui
-        val user: User = requireActivity().intent.getSerializableExtra("user") as User
+        val user: UserData = requireActivity().intent.getSerializableExtra("user") as UserData
         val post = arguments?.getSerializable("post") as ForumData
         functions = Firebase.functions("southamerica-east1")
 

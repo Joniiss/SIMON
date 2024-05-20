@@ -1,23 +1,17 @@
-package com.app.simon.ui.main
+package com.app.simon
 
-import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.app.simon.MyAdapter
-import com.app.simon.R
-import com.app.simon.SubjectData
-import com.app.simon.User
+import com.app.simon.adapter.MyAdapter
+import com.app.simon.data.SubjectData
+import com.app.simon.data.UserData
 import com.app.simon.databinding.FragmentMainBinding
 
 
@@ -28,10 +22,6 @@ class MainFragment : Fragment() {
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: MyAdapter
     private lateinit var mItems: MutableList<String>
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +35,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
+        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as UserData
 
 
         mRecyclerView = binding.rvLista
@@ -59,7 +49,7 @@ class MainFragment : Fragment() {
             mItems.add(itemSubject)
         }
 
-        mAdapter = MyAdapter(mItems)
+        mAdapter = MyAdapter(mItems, this)
         mRecyclerView.adapter = mAdapter
 
         binding.btnMateriasMonitoradas.setOnClickListener {

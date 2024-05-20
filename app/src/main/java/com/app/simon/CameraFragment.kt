@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
@@ -19,11 +18,9 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.simon.data.UserData
 import com.app.simon.databinding.FragmentCameraBinding
-import com.app.simon.databinding.FragmentMainBinding
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -63,7 +60,7 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as User
+        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as UserData
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
         cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
@@ -142,7 +139,7 @@ class CameraFragment : Fragment() {
     }
 
     private fun salvarFoto(foto: String): String {
-        val user = arguments?.getSerializable("user") as User
+        val user = arguments?.getSerializable("user") as UserData
 
         val millis = System.currentTimeMillis()
         val fotopath = "gs://simon-12985.appspot.com/perfis/img-${millis}.jpeg"

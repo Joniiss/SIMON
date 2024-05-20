@@ -1,4 +1,4 @@
-package com.app.simon
+package com.app.simon.data
 
 import java.io.Serializable
 
