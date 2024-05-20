@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.app.simon.databinding.FragmentForumBinding
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.simon.adapter.ForumAdapter
 import com.app.simon.data.ForumData
+import com.app.simon.data.UserData
 import com.beust.klaxon.Klaxon
 import com.google.android.gms.tasks.Task
 import com.google.firebase.functions.FirebaseFunctions
@@ -45,7 +47,8 @@ class ForumFragment : Fragment() {
         //fazer tudo aqui
         functions = Firebase.functions("southamerica-east1")
 
-        val materia = requireActivity().intent.getStringExtra("materiaSub")
+        val user = arguments?.getSerializable("user") as UserData
+        val materia = arguments?.getString("materiaSub")
 
         mRecyclerView = binding.rvListaForum
         mRecyclerView.setLayoutManager(LinearLayoutManager(this.context));
@@ -99,12 +102,16 @@ class ForumFragment : Fragment() {
         //mAdapter = ForumAdapter(lista, this.requireContext(), this)
         //mRecyclerView.adapter = mAdapter
 
+
         binding.btnMonitores.setOnClickListener {
             findNavController().navigate(R.id.action_forumFragment_to_subjectFragment)
         }
 
         binding.fbtnAddPost.setOnClickListener {
-            findNavController().navigate(R.id.action_forumFragment_to_newPostFragment)
+            val bundle = bundleOf(
+                "materiaSub" to materia,
+                "user" to user)
+            findNavController().navigate(R.id.action_forumFragment_to_newPostFragment, bundle)
         }
 
 

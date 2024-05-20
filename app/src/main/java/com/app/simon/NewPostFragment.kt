@@ -32,8 +32,8 @@ class NewPostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val user = activity?.getIntent()?.getExtras()?.getSerializable("user") as UserData
-        val materia = requireActivity().intent.getStringExtra("materiaSub")
+        val user = arguments?.getSerializable("user") as UserData
+        val materia = arguments?.getString("materiaSub")
 
         binding.etAddTittle.addTextChangedListener {
             if(binding.etAddComment.text.isNotEmpty() && binding.etAddTittle.text.isNotEmpty()){

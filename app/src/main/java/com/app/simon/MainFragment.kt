@@ -53,8 +53,7 @@ class MainFragment : Fragment() {
         mRecyclerView.adapter = mAdapter
 
         binding.btnMateriasMonitoradas.setOnClickListener {
-            val bundle = bundleOf("post" to mItems)
-            findNavController().navigate(R.id.action_mainFragment_to_materiasMonitoradasFragment, bundle)
+            findNavController().navigate(R.id.action_mainFragment_to_materiasMonitoradasFragment)
         }
     }
 

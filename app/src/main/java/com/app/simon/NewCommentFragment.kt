@@ -72,9 +72,19 @@ class NewCommentFragment : Fragment() {
                         "false"
                     )
                 )
-            binding.root.postDelayed({
-                findNavController().popBackStack()
-            }, 1000)
+            if(monitor == "true") {
+                db.collection("Forum")
+                    .document(post.id)
+                    .update(
+                        "aprovado", "true",
+                        "qtdComent", (post.qtdComent as Int)+1
+                    )
+                    .addOnCompleteListener {
+                        binding.root.postDelayed({
+                            findNavController().popBackStack()
+                        }, 1000)
+                    }
+            }
         }
     }
 

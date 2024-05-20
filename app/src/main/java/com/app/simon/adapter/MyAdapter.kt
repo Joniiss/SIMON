@@ -36,17 +36,12 @@ class MyAdapter(private val mData: MutableList<SubjectData>, private val myFragm
             textView.text = item.materia
 
             itemView.setOnClickListener{
-
-//                val iSubject = Intent(itemView.context, SubjectActivity::class.java)
-//                iSubject.putExtra("user", item.user)
-//                iSubject.putExtra("materiaSub", item.materia)
-//                itemView.context.startActivity(iSubject)
                 val bundle = bundleOf(
                     "user" to item.user,
                     "materiaSub" to item.materia
                 )
                 NavHostFragment.findNavController(fragment)
-                    .navigate(R.id.action_mainFragment_to_subjectFragment2, bundle)
+                    .navigate(R.id.action_mainFragment_to_subjectFragment, bundle)
             }
         }
     }

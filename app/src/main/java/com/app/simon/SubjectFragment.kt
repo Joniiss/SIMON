@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -91,7 +92,11 @@ class SubjectFragment : Fragment() {
 //        mItems.add(exemplo2)
 
         binding.btnForum.setOnClickListener {
-            findNavController().navigate(R.id.action_subjectFragment_to_forumFragment)
+            val bundle = bundleOf(
+                "materiaSub" to materia,
+                "user" to user
+            )
+            findNavController().navigate(R.id.action_subjectFragment_to_forumFragment, bundle)
         }
 
     }

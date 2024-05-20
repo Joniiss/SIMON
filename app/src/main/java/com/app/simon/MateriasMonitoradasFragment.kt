@@ -47,7 +47,7 @@ class MateriasMonitoradasFragment : Fragment() {
 
         //mItems.add(testeItem)
 
-        mAdapter = MateriaMonitoradaAdapter(mItems)
+        mAdapter = MateriaMonitoradaAdapter(mItems, this)
         mRecyclerView.adapter = mAdapter
 
         binding.btnMaterias.setOnClickListener {
