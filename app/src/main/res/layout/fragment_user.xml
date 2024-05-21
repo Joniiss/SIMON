@@ -313,6 +313,17 @@
             android:singleLine="true"
             />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEditarHorarioDe"
+            android:layout_width="45dp"
+            android:layout_height="48dp"
+            android:textAlignment="center"
+            android:drawableStart="@drawable/toggle_selector"
+            android:backgroundTint="@color/amarelo"
+            app:layout_constraintBottom_toBottomOf="@id/etHorarioDe"
+            app:layout_constraintEnd_toEndOf="@id/etHorarioDe"
+            app:layout_constraintTop_toTopOf="@id/etHorarioDe"/>
+
         <EditText
             android:id="@+id/etHorarioAte"
             android:layout_width="160dp"
@@ -330,6 +341,19 @@
             app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toEndOf="@id/etHorarioDe"
             app:layout_constraintTop_toBottomOf="@id/tvDe" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEditarHorarioAte"
+            android:layout_width="45dp"
+            android:layout_height="48dp"
+            android:textAlignment="center"
+            android:drawableStart="@drawable/toggle_selector"
+            android:backgroundTint="@color/amarelo"
+            app:layout_constraintBottom_toBottomOf="@id/etHorarioAte"
+            app:layout_constraintEnd_toEndOf="@id/etHorarioAte"
+            app:layout_constraintTop_toTopOf="@id/etHorarioAte"/>
+
 
         <TextView
         android:id="@+id/tvStatus"

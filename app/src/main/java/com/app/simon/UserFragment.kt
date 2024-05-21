@@ -1,6 +1,7 @@
 package com.app.simon
 
 import android.Manifest
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -28,6 +29,7 @@ import com.squareup.picasso.Picasso
 import java.io.File
 import java.lang.ClassCastException
 import java.time.LocalDateTime
+import java.util.Calendar
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.DurationUnit
 
@@ -274,6 +276,55 @@ class UserFragment : Fragment() {
                 }
             }
         }
+        val calendar = Calendar.getInstance()
+
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+
+        binding.btnEditarHorarioDe.setOnClickListener {
+            val timePickerDialog = TimePickerDialog(context, { _, hourOfDay, minute ->
+                binding.etHorarioDe.hint = "$hourOfDay:$minute"
+                if(minute<10){
+                    if(hourOfDay<10){
+                        binding.etHorarioDe.hint = "0$hourOfDay:0$minute"
+                    }else{
+                        binding.etHorarioDe.hint = "$hourOfDay:0$minute"
+                    }
+                }else{
+                    if(hourOfDay<10){
+                        binding.etHorarioDe.hint = "0$hourOfDay:$minute"
+                    }else{
+                        binding.etHorarioDe.hint = "$hourOfDay:$minute"
+                    }
+                }
+                user.horario = "${binding.etHorarioDe.hint}-${binding.etHorarioAte.hint}"
+                attHorario(binding.etHorarioDe.hint as String, binding.etHorarioAte.hint as String)
+            }, hour, minute, android.text.format.DateFormat.is24HourFormat(context))
+            timePickerDialog.show()
+        }
+
+        binding.btnEditarHorarioAte.setOnClickListener {
+            val timePickerDialog = TimePickerDialog(context, { _, hourOfDay, minute ->
+                binding.etHorarioAte.hint = "$hourOfDay:$minute"
+                if(minute<10){
+                    if(hourOfDay<10){
+                        binding.etHorarioAte.hint = "0$hourOfDay:0$minute"
+                    }else{
+                        binding.etHorarioAte.hint = "$hourOfDay:0$minute"
+                    }
+                }else{
+                    if(hourOfDay<10){
+                        binding.etHorarioAte.hint = "0$hourOfDay:$minute"
+                    }else{
+                        binding.etHorarioAte.hint = "$hourOfDay:$minute"
+                    }
+                }
+                user.horario = "${binding.etHorarioDe.hint}-${binding.etHorarioAte.hint}"
+                attHorario(binding.etHorarioDe.hint as String, binding.etHorarioAte.hint as String)
+            }, hour, minute, android.text.format.DateFormat.is24HourFormat(context))
+            timePickerDialog.show()
+        }
+
     }
 
     private fun cameraScreen() {
@@ -323,6 +374,10 @@ class UserFragment : Fragment() {
         attFirestore("status", status)
     }
 
+    private fun attHorario(horaDe:String, horaAte:String){
+        attFirestore("horario","${horaDe}-${horaAte}");
+    }
+
     private fun getLogHoras(uid: String): Task<String> {
 
         val data = hashMapOf(
@@ -336,6 +391,7 @@ class UserFragment : Fragment() {
                 res
             }
     }
+
 /*
     override fun onDestroyView() {
         super.onDestroyView()
