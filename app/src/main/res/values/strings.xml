@@ -4,10 +4,10 @@
     <string name="app_name">SIMON</string>
     <string name="login">Seja bem-vindo!</string>
     <string name="label" />
-    <string name="hint_ra">Insira seu RA</string>
+    <string name="hint_ra">Insira seu email</string>
     <string name="hint_senha">Insira sua senha</string>
     <string name="entrar">Entrar</string>
-    <string name="logo">Imagem da logo da faculdade PUC Campinas</string>
+    <string name="logo">Imagem da logo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_camera">CameraActivity</string>

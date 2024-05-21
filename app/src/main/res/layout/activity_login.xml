@@ -10,11 +10,13 @@
 
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="10dp"
         android:contentDescription="@string/logo"
-        android:src="@drawable/logopuc"
+        android:src="@drawable/logo"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,13 +25,13 @@
         android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="-40dp"
         android:text="@string/login"
         android:textFontWeight="@android:integer/config_longAnimTime"
         android:textSize="35sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/ivLogo" />
+        app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etRa"
