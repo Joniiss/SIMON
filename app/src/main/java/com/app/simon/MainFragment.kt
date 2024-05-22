@@ -49,6 +49,10 @@ class MainFragment : Fragment() {
             mItems.add(itemSubject)
         }
 
+        if(user.materias.isEmpty()){
+            binding.tvListaVazia.text = "Você não tem matérias registradas!"
+        }
+
         mAdapter = MyAdapter(mItems, this)
         mRecyclerView.adapter = mAdapter
 

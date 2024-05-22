@@ -84,6 +84,7 @@ class SubjectFragment : Fragment() {
                         mRecyclerView.adapter = mAdapter
                     } else {
                         Toast.makeText(context, "Essa matéria n tem monitores!", Toast.LENGTH_SHORT).show()
+                        binding.tvListaVazia.text = "Essa matéria não tem monitores!"
                     }
                 }
             }

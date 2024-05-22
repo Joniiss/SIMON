@@ -47,6 +47,10 @@ class MateriasMonitoradasFragment : Fragment() {
 
         //mItems.add(testeItem)
 
+        if(user.materiasMonitor.isEmpty()){
+            binding.tvListaVazia.text = "Você não é monitor de nenhuma matéria!"
+        }
+
         mAdapter = MateriaMonitoradaAdapter(mItems, this)
         mRecyclerView.adapter = mAdapter
 

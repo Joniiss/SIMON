@@ -110,6 +110,7 @@ class PostFragment : Fragment() {
                         mRecyclerView.adapter = mAdapter
                     } else {
                         Toast.makeText(context, "Essa matéria n tem comentarios!", Toast.LENGTH_SHORT).show()
+                        binding.tvListaVazia.text = "Essa matéria não tem comentários!"
                     }
                 }
             }

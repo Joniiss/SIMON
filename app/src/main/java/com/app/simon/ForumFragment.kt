@@ -90,10 +90,15 @@ class ForumFragment : Fragment() {
                             i++
                         }
 
+                        if(postsRec.isEmpty()){
+                            binding.tvListaVazia.text = "O forúm desta matéria está vazio!";
+                        }
+
                         mAdapter = ForumAdapter(postsRec!!, this.requireContext(), this)
                         mRecyclerView.adapter = mAdapter
                     } else {
                         //Toast.makeText(context, "Essa matéria n tem monitores!", Toast.LENGTH_SHORT).show()
+                        binding.tvListaVazia.text = "Essa matéria não tem posts!"
                     }
                 }
 
