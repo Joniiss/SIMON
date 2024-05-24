@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.app.simon.databinding.FragmentForumBinding
@@ -49,6 +50,8 @@ class ForumFragment : Fragment() {
 
         val user = arguments?.getSerializable("user") as UserData
         val materia = arguments?.getString("materiaSub")
+
+        (activity as? AppCompatActivity)?.supportActionBar?.title = materia
 
         mRecyclerView = binding.rvListaForum
         mRecyclerView.setLayoutManager(LinearLayoutManager(this.context));

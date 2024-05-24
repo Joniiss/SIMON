@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.app.simon.databinding.FragmentPerfilMonitorBinding
 import com.app.simon.data.MonitorData
 import com.google.firebase.storage.FirebaseStorage
@@ -32,6 +33,7 @@ class PerfilMonitorFragment : Fragment() {
 
         val monitor = arguments?.getSerializable("monitor") as MonitorData
 
+        (activity as? AppCompatActivity)?.supportActionBar?.title = monitor.nome
 
         if(monitor.status == "true"){
             binding.ivSmallerCam.setCardBackgroundColor(Color.parseColor("#48d41e"))

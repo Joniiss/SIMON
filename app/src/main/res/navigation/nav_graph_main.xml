@@ -35,8 +35,8 @@
     <fragment
         android:id="@+id/materiasMonitoradasFragment"
         android:name="com.app.simon.MateriasMonitoradasFragment"
-        android:label="fragment_materias_monitoradas"
-        tools:layout="@layout/fragment_materias_monitoradas" >
+        android:label="Matérias do Monitor"
+        tools:layout="@layout/fragment_materias_monitoradas">
         <argument
             android:name="subjectData"
             app:argType="com.app.simon.data.SubjectData" />
@@ -113,8 +113,8 @@
     <fragment
         android:id="@+id/newPostFragment"
         android:name="com.app.simon.NewPostFragment"
-        android:label="fragment_new_post"
-        tools:layout="@layout/fragment_new_post" >
+        android:label="Novo Post"
+        tools:layout="@layout/fragment_new_post">
         <action
             android:id="@+id/action_newPostFragment_to_forumFragment"
             app:destination="@id/forumFragment" />
@@ -140,8 +140,8 @@
     <fragment
         android:id="@+id/newCommentFragment"
         android:name="com.app.simon.NewCommentFragment"
-        android:label="fragment_new_comment"
-        tools:layout="@layout/fragment_new_comment" >
+        android:label="Novo Comentário"
+        tools:layout="@layout/fragment_new_comment">
         <action
             android:id="@+id/action_newCommentFragment_to_postFragment"
             app:destination="@id/postFragment" />

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,12 +42,15 @@ class PostFragment : Fragment() {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         //fazer tudo aqui
         val user: UserData = requireActivity().intent.getSerializableExtra("user") as UserData
         val post = arguments?.getSerializable("post") as ForumData
+        (activity as? AppCompatActivity)?.supportActionBar?.title = post.materiaP
         functions = Firebase.functions("southamerica-east1")
 
         binding.tvTituloDentroPost.text = post.titulo
