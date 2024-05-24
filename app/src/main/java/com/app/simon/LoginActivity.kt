@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -22,6 +23,7 @@ import com.google.firebase.functions.ktx.functions
 import com.google.firebase.ktx.Firebase
 import com.google.gson.GsonBuilder
 import java.io.Serializable
+import kotlin.system.exitProcess
 
 class LoginActivity : AppCompatActivity() {
 
@@ -168,4 +170,15 @@ class LoginActivity : AppCompatActivity() {
                 gson.toJson(task.result?.data)
             }
     }
+
+    override fun onBackPressed() {
+
+
+        AlertDialog.Builder(this)
+                .setMessage("Deseja mesmo sair?")
+                .setPositiveButton("Sim") { _, _ -> finishAffinity() }
+                .setNegativeButton("Não", null)
+                .show()
+    }
+
 }
