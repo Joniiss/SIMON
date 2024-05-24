@@ -22,6 +22,7 @@ class LoadingActivity : AppCompatActivity() {
     private var db = FirebaseFirestore.getInstance()
     private lateinit var functions: FirebaseFunctions
     private val gson = GsonBuilder().enableComplexMapKeySerialization().create()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -98,15 +99,12 @@ class LoadingActivity : AppCompatActivity() {
 
     private fun login(uid: String): Task<String> {
 
-        val data = hashMapOf(
-            "uid" to uid
-        )
+        val data = hashMapOf("uid" to uid)
         return functions
             .getHttpsCallable("login")
             .call(data)
             .continueWith { task ->
-                val res = gson.toJson(task.result?.data)
-                res
+                gson.toJson(task.result?.data)
             }
     }
 }

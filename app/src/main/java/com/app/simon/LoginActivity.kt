@@ -53,14 +53,15 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
+
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         auth = Firebase.auth
 
@@ -159,15 +160,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun login(uid: String): Task<String> {
 
-        val data = hashMapOf(
-            "uid" to uid
-        )
+        val data = hashMapOf("uid" to uid)
         return functions
             .getHttpsCallable("login")
             .call(data)
             .continueWith { task ->
-                val res = gson.toJson(task.result?.data)
-                res
+                gson.toJson(task.result?.data)
             }
     }
 }
