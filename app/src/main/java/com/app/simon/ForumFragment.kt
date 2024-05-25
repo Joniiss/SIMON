@@ -52,7 +52,6 @@ class ForumFragment : Fragment() {
         mRecyclerView = binding.rvListaForum
         mRecyclerView.setLayoutManager(LinearLayoutManager(this.context));
 
-        binding.tvTituloMateria.text = materia
 
         val postsList: MutableList<String> = emptyList<String>().toMutableList()
         val ids: MutableList<String> = emptyList<String>().toMutableList()

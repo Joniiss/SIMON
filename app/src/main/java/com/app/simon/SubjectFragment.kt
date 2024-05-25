@@ -51,7 +51,6 @@ class SubjectFragment : Fragment() {
 
         (activity as? AppCompatActivity)?.supportActionBar?.title = materia
 
-        binding.tvTituloMateria.text = materia
 
         mRecyclerView = binding.rvListaMonitores
         mRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
