@@ -93,7 +93,6 @@ class CameraActivity : ComponentActivity() {
             val fileName = "JPEG_${System.currentTimeMillis()}.jpeg"
             file = File(externalMediaDirs[0], fileName)
 
-
             val outputFileOptions = ImageCapture.OutputFileOptions.Builder(file).build()
 
             it.takePicture(
@@ -102,8 +101,6 @@ class CameraActivity : ComponentActivity() {
                 object : ImageCapture.OnImageSavedCallback{
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                         Log.i("CameraPreview", "A imagem foi salva no diretório: ${file.toUri()}")
-                        lateinit var path: String
-                        path = Environment.getExternalStorageDirectory().toString() + fileName
                     }
 
                     override fun onError(exception: ImageCaptureException) {
@@ -142,79 +139,4 @@ class CameraActivity : ComponentActivity() {
             }
         user.foto = fotopath
     }
-
-    /*
-
-    private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
-
-        val fileName = "dentist_profile_picture_${System.currentTimeMillis()}.jpg"
-        val outputDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val photoFile = File(outputDirectory, fileName)
-
-        imageCapture.takePicture(
-            imgCaptureExecutor,
-            object : ImageCapture.OnImageCapturedCallback() {
-                override fun onCaptureSuccess(image: ImageProxy) {
-                    val buffer = image.planes[0].buffer
-                    val imageBytes = ByteArray(buffer.remaining())
-                    buffer.get(imageBytes)
-
-                    val bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-                    val outputStream = FileOutputStream(photoFile)
-
-                    val rotationDegrees = image.imageInfo.rotationDegrees
-
-                    val matrix = Matrix()
-                    matrix.postRotate(rotationDegrees.toFloat())
-                    val rotatedBitmap =
-                        Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-                    rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-                    outputStream.close()
-
-                    runOnUiThread {
-                        binding.ivCapturedPhoto.setImageBitmap(rotatedBitmap)
-                        binding.ivCapturedPhoto.visibility = View.VISIBLE
-                        binding.btnAcceptPhoto.visibility = View.VISIBLE
-                        binding.btnCancelPhoto.visibility = View.VISIBLE
-                        binding.cameraPreview.visibility = View.INVISIBLE
-                        binding.btnTakePhoto.visibility = View.INVISIBLE
-                        binding.btnCancelPhoto.setOnClickListener {
-                            photoFile.delete()
-                            binding.ivCapturedPhoto.visibility = View.INVISIBLE
-                            binding.btnAcceptPhoto.visibility = View.INVISIBLE
-                            binding.btnCancelPhoto.visibility = View.INVISIBLE
-                            binding.cameraPreview.visibility = View.VISIBLE
-                            binding.btnTakePhoto.visibility = View.VISIBLE
-                        }
-                        binding.btnAcceptPhoto.setOnClickListener {
-                            savePhoto(photoFile)
-                            onBackPressed()
-                        }
-                    }
-
-                    image.close()
-                }
-            }
-        )
-
-    }
-
-    private fun savePhoto(file: File) {
-
-        val storage = Firebase.storage.reference
-
-        val firebaseFile = file.toUri()
-        val dentistGallery =
-            storage.child("DentistUserPictures/${firebaseFile.lastPathSegment}")
-        val uploadTask = dentistGallery.putFile(firebaseFile)
-
-        uploadTask.addOnFailureListener {
-            Log.e("DatabaseSaving", "Não foi possível salvar a imagem")
-        }.addOnSuccessListener {
-            Log.d("DatabaseSaving", "A imagem foi salva com sucesso!")
-            //Constants.updateDentistData(dentistGallery.toString(), "foto")
-        }
-    }
-    */
 }

@@ -21,7 +21,6 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mAdapter: MyAdapter
-    private lateinit var mItems: MutableList<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,

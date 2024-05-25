@@ -43,10 +43,6 @@ class MateriasMonitoradasFragment : Fragment() {
             mItems.add(itemSubject)
         }
 
-        val testeItem = SubjectData(user, "Teste Materia Monitorada")
-
-        //mItems.add(testeItem)
-
         if(user.materiasMonitor.isEmpty()){
             binding.tvListaVazia.text = "Você não é monitor de nenhuma matéria!"
         }

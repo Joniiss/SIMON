@@ -40,12 +40,10 @@ class CameraFragment : Fragment() {
 
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
 
-    //selecionar qual camera usar
     private lateinit var cameraSelector: CameraSelector
 
     private var imageCapture: ImageCapture? = null
 
-    //executor de thread separado
     private lateinit var imgCaptureExecutor: ExecutorService
 
     override fun onCreateView(
@@ -115,8 +113,6 @@ class CameraFragment : Fragment() {
                 object : ImageCapture.OnImageSavedCallback{
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                         Log.i("CameraPreview", "A imagem foi salva no diretório: ${file.toUri()}")
-                        lateinit var path: String
-                        path = Environment.getExternalStorageDirectory().toString() + fileName
                     }
 
                     override fun onError(exception: ImageCaptureException) {
@@ -139,7 +135,6 @@ class CameraFragment : Fragment() {
     }
 
     private fun salvarFoto(foto: String): String {
-        val user = arguments?.getSerializable("user") as UserData
 
         val millis = System.currentTimeMillis()
         val fotopath = "gs://simon-12985.appspot.com/perfis/img-${millis}.jpeg"

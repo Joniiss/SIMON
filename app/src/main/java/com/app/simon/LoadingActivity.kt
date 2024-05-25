@@ -29,18 +29,11 @@ class LoadingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_loading)
 
         auth = Firebase.auth
-
-        /*
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }*/
     }
 
     override fun onStart() {
         super.onStart()
-        //auth.signOut()
+
         val currentUser = auth.currentUser
         functions = Firebase.functions("southamerica-east1")
 

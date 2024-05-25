@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.simon.databinding.FragmentSubjectBinding
 import com.app.simon.adapter.MonitorAdapter
-import com.app.simon.data.ForumData
 import com.app.simon.data.MonitorData
 import com.app.simon.data.UserData
 import com.beust.klaxon.Klaxon
@@ -46,12 +44,6 @@ class SubjectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
-
         functions = Firebase.functions("southamerica-east1")
 
         val materia = arguments?.getString("materiaSub")
@@ -64,14 +56,7 @@ class SubjectFragment : Fragment() {
         mRecyclerView = binding.rvListaMonitores
         mRecyclerView.setLayoutManager(LinearLayoutManager(this.context))
 
-        var mItems: MutableList<MonitorData> = emptyList<MonitorData>().toMutableList()
-
-        var exemplo = MonitorData("Alfredo","Local: S02 - H15","Horario: 16:20 as 16:30", "H15", "S02", "", "", "", "")
-        var exemplo2 = MonitorData("qualquer coisa","Local: S02 - H15","Horario: 16:20 as 16:30", "H15", "S02", "", "", "", "")
-
-        Toast.makeText(context, materia!!, Toast.LENGTH_SHORT).show()
-
-        getMonitores(materia)
+        getMonitores(materia!!)
             .addOnCompleteListener { task ->
                 if(task.isSuccessful) {
                     val genericResp = gson.fromJson(
@@ -86,14 +71,10 @@ class SubjectFragment : Fragment() {
                         mAdapter = MonitorAdapter(monitor!!, this.requireContext(), this)
                         mRecyclerView.adapter = mAdapter
                     } else {
-                        Toast.makeText(context, "Essa matéria n tem monitores!", Toast.LENGTH_SHORT).show()
                         binding.tvListaVazia.text = "Essa matéria não tem monitores!"
                     }
                 }
             }
-
-//        mItems.add(exemplo)
-//        mItems.add(exemplo2)
 
         binding.btnForum.setOnClickListener {
             val bundle = bundleOf(

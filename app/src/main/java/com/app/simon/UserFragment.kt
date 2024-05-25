@@ -192,10 +192,7 @@ class UserFragment : Fragment() {
         }
 
         binding.btnChangePhoto.setOnClickListener {
-            val bundle = bundleOf("user" to user)
             cameraProviderResult.launch(Manifest.permission.CAMERA)
-            //cameraProviderResult.launch(Manifest.permission.CAMERA)
-            //findNavController().popBackStack()
         }
 
         binding.btnLogout.setOnClickListener {
@@ -391,11 +388,4 @@ class UserFragment : Fragment() {
                 res
             }
     }
-
-/*
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-    */
 }

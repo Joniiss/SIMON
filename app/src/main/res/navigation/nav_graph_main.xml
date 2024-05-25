@@ -50,8 +50,8 @@
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.app.simon.CameraFragment"
-        android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" >
+        android:label="Câmera"
+        tools:layout="@layout/fragment_camera">
         <action
             android:id="@+id/action_cameraFragment_to_userFragment"
             app:destination="@id/userFragment" />

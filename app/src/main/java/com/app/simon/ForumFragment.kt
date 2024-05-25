@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -38,14 +37,11 @@ class ForumFragment : Fragment() {
     ): View {
         _binding = FragmentForumBinding.inflate(inflater, container, false)
         return binding.root
-
-        //não alterar onCreateView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //fazer tudo aqui
         functions = Firebase.functions("southamerica-east1")
 
         val user = arguments?.getSerializable("user") as UserData
@@ -56,16 +52,10 @@ class ForumFragment : Fragment() {
         mRecyclerView = binding.rvListaForum
         mRecyclerView.setLayoutManager(LinearLayoutManager(this.context));
 
-        //val teste = ForumData("Teste Post")
         binding.tvTituloMateria.text = materia
 
         val postsList: MutableList<String> = emptyList<String>().toMutableList()
         val ids: MutableList<String> = emptyList<String>().toMutableList()
-
-        //lista.add(teste)
-        //lista.add(teste2)
-
-        Toast.makeText(context, materia.toString(), Toast.LENGTH_SHORT).show()
 
         getPosts(materia!!)
             .addOnCompleteListener { task ->
@@ -100,16 +90,11 @@ class ForumFragment : Fragment() {
                         mAdapter = ForumAdapter(postsRec!!, this.requireContext(), this)
                         mRecyclerView.adapter = mAdapter
                     } else {
-                        //Toast.makeText(context, "Essa matéria n tem monitores!", Toast.LENGTH_SHORT).show()
                         binding.tvListaVazia.text = "Essa matéria não tem posts!"
                     }
                 }
 
             }
-
-        //mAdapter = ForumAdapter(lista, this.requireContext(), this)
-        //mRecyclerView.adapter = mAdapter
-
 
         binding.btnMonitores.setOnClickListener {
             findNavController().navigate(R.id.action_forumFragment_to_subjectFragment)
@@ -143,5 +128,4 @@ class ForumFragment : Fragment() {
                 res
             }
     }
-
 }

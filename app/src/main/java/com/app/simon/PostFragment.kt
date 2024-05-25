@@ -47,7 +47,6 @@ class PostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //fazer tudo aqui
         val user: UserData = requireActivity().intent.getSerializableExtra("user") as UserData
         val post = arguments?.getSerializable("post") as ForumData
         (activity as? AppCompatActivity)?.supportActionBar?.title = post.materiaP
@@ -70,16 +69,6 @@ class PostFragment : Fragment() {
         mRecyclerView = binding.rvListaComentario
         mRecyclerView.setLayoutManager(LinearLayoutManager(this.context));
 
-        //val teste = CommentData("Teste Post")
-
-        //val teste2 = CommentData("Teste Post Lista matei minha familia e comecei um culto  sem querer familia tmj ")
-
-        val lista: MutableList<CommentData> = emptyList<CommentData>().toMutableList()
-
-
-
-        //lista.add(teste)
-        //lista.add(teste2)
         println(post.id)
         getComentarios(post.id)
             .addOnCompleteListener { task ->
@@ -118,9 +107,6 @@ class PostFragment : Fragment() {
                     }
                 }
             }
-
-        //mAdapter = PostAdapter(lista, this.requireContext())
-        //mRecyclerView.adapter = mAdapter
     }
 
     private fun getComentarios(post: String): Task<String> {

@@ -2,22 +2,12 @@ package com.app.simon
 
 import com.google.gson.annotations.SerializedName
 
-/***
- * Como adotamos um padrão sempre de respostas
- * lá nas "Firebase Functions",
- * sempre teremos um "JSON" genérico.
- * Com isso podemos tratar cada resposta especificamente
- * a partir desta.
- *
- */
 class FunctionsGenericResponse {
 
     enum class StatusType(val type: String) {
         ERROR("ERROR"),
         SUCCESS("SUCCESS");
     }
-
-
 
     @SerializedName("status")
     var status: StatusType? = null;

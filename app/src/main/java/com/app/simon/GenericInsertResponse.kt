@@ -2,14 +2,6 @@ package com.app.simon
 
 import com.google.gson.annotations.SerializedName
 
-/***
- * Supondo que cada vez que vc
- * use uma Function que retorne um documentId (docId) no payload
- * como um Json, basta tratar como um objeto de resposta.
- * Isso organiza o código e pode ser reaproveitado para
- * qualquer function que retorne no payload um docId
- *
- */
 class GenericInsertResponse {
 
     @SerializedName("nome")

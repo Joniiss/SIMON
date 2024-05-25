@@ -1,5 +1,6 @@
 package com.app.simon
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -30,26 +31,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var functions: FirebaseFunctions
-    private lateinit var userPreferencesRepository: UserPreferencesRepository
+    //private lateinit var userPreferencesRepository: UserPreferencesRepository
     private var db = FirebaseFirestore.getInstance()
     private val gson = GsonBuilder().enableComplexMapKeySerialization().create()
-
-    fun storeUserId(uid: String) {
-        userPreferencesRepository.updateUid(uid)
-    }
-
-    private fun storeFcmToken() {
-        Firebase.messaging.token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                return@OnCompleteListener
-            }
-            userPreferencesRepository.fcmToken = task.result
-        })
-    }
-
-    fun getFcmToken(): String {
-        return userPreferencesRepository.fcmToken
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -151,15 +135,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        val currentUser = FirebaseAuth.getInstance().currentUser
-//        if(currentUser != null) {
-//            startActivity(Intent(this, MainActivity::class.java))
-//            finish()
-//        }
-//    }
-
     private fun login(uid: String): Task<String> {
 
         val data = hashMapOf("uid" to uid)
@@ -171,14 +146,12 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+    @SuppressLint("MissingSuperCall")
     override fun onBackPressed() {
-
-
         AlertDialog.Builder(this)
                 .setMessage("Deseja mesmo sair?")
                 .setPositiveButton("Sim") { _, _ -> finishAffinity() }
                 .setNegativeButton("Não", null)
                 .show()
     }
-
 }

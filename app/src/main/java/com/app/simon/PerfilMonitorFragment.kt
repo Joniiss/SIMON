@@ -38,14 +38,7 @@ class PerfilMonitorFragment : Fragment() {
         if(monitor.status == "true"){
             binding.ivSmallerCam.setCardBackgroundColor(Color.parseColor("#48d41e"))
         }
-/*
-        val storage = FirebaseStorage.getInstance()
-        val storageRef = storage.getReferenceFromUrl(monitor.foto)
 
-        storageRef.downloadUrl.addOnSuccessListener {
-            Picasso.with(context).load(it).fit().centerInside().into(binding.ivPerfil)
-        }
-*/
         val storage = FirebaseStorage.getInstance()
         val storageRef1 = storage.getReferenceFromUrl(monitor.foto)
         val localFile1 = File.createTempFile("images", "jpg")
